@@ -103,8 +103,18 @@ tr:last-child td{border-bottom:0}
 <div class="wrap" id="board" hidden>
   <header class="head">
     <div><h1>لوحة آصِرة</h1><p class="muted small" id="stamp" aria-live="polite"></p></div>
-    <div class="acts"><button class="btn" type="button" id="refresh">تحديث</button><button class="btn" type="button" id="out">خروج</button></div>
+    <div class="acts"><button class="btn" type="button" id="refresh">تحديث</button><button class="btn" type="button" id="chg">تغيير المفتاح</button><button class="btn" type="button" id="out">خروج</button></div>
   </header>
+  <form class="card" id="chgF" hidden style="display:grid;gap:10px;max-width:420px;margin-bottom:12px">
+    <h2>مفتاح جديد</h2>
+    <p class="muted small">8 أحرف أو أرقام على الأقل، واختر مفتاحًا لا تستخدمه في حسابات أخرى.</p>
+    <label class="small" for="k1">المفتاح الجديد</label>
+    <input class="input" id="k1" type="password" autocomplete="new-password" required minlength="8">
+    <label class="small" for="k2">أعد كتابته</label>
+    <input class="input" id="k2" type="password" autocomplete="new-password" required minlength="8">
+    <div class="err" id="chgErr" role="alert" hidden></div>
+    <div style="display:flex;gap:8px"><button class="btn btn-primary" type="submit">حفظ</button><button class="btn" type="button" id="chgX">إلغاء</button></div>
+  </form>
   <div class="err" id="boardErr" role="alert" hidden style="margin-bottom:12px"></div>
   <section class="tiles" id="tiles" aria-label="الأرقام الرئيسية"></section>
   <section class="card">
@@ -233,6 +243,22 @@ $("#gateF").addEventListener("submit",async ev=>{
   finally{b.disabled=false}
 });
 $("#refresh").addEventListener("click",load);
+const chgF=$("#chgF");
+function closeChg(){chgF.hidden=true;chgF.reset();$("#chgErr").hidden=true}
+$("#chg").addEventListener("click",()=>{chgF.hidden=false;$("#k1").focus()});
+$("#chgX").addEventListener("click",closeChg);
+chgF.addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const a=$("#k1").value,e=$("#chgErr");
+  const fail=m=>{e.textContent=m;e.hidden=false};
+  if(a.trim().length<8)return fail("المفتاح يجب أن يكون 8 خانات على الأقل");
+  if(a!==$("#k2").value)return fail("المفتاحان غير متطابقين");
+  try{
+    const r=await fetch(BACKEND.url+"/rest/v1/rpc/asira_set_key",{method:"POST",headers:{"Content-Type":"application/json",apikey:BACKEND.key,Authorization:"Bearer "+BACKEND.key},body:JSON.stringify({p_old:KEY,p_new:a})});
+    if(!r.ok)throw new Error("http "+r.status);
+    KEY=a;store.set(a);closeChg();$("#stamp").textContent="تم تغيير المفتاح";
+  }catch(err){fail("تعذّر تغيير المفتاح. حاول مرة أخرى.")}
+});
 $("#out").addEventListener("click",()=>showGate());
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&KEY)load()});
 
