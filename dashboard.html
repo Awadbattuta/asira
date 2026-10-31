@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة آصِرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F3F6FA; --surface:#FFFFFF; --sunk:#EDF1F6;
+  --ink:#0D1B2A; --muted:#556274; --line:#E3E8EF;
+  --bar:#08965F; --bar-strong:#067A4D; --bar-soft:#DCF7EA; --on-bar:#FFFFFF;
+  --danger:#C62828; --danger-soft:#FDECEA;
+  --shadow:0 1px 2px rgba(13,27,42,.04),0 12px 32px -8px rgba(13,27,42,.10);
+  --f-display:"Alexandria","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0B111C; --surface:#131B29; --sunk:#0F1622;
+  --ink:#EEF3F8; --muted:#9AA8BA; --line:#223047;
+  --bar:#2FD38F; --bar-strong:#5BE3AA; --bar-soft:#0F3328; --on-bar:#052016;
+  --danger:#FF8A80; --danger-soft:#3E1714;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -8px rgba(0,0,0,.4);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0B111C; --surface:#131B29; --sunk:#0F1622;
+  --ink:#EEF3F8; --muted:#9AA8BA; --line:#223047;
+  --bar:#2FD38F; --bar-strong:#5BE3AA; --bar-soft:#0F3328; --on-bar:#052016;
+  --danger:#FF8A80; --danger-soft:#3E1714;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -8px rgba(0,0,0,.4);
+  color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin-inline:auto;padding:24px 16px 56px}
+h1,h2{font-family:var(--f-display);margin:0;line-height:1.3}
+h1{font-size:1.6rem;font-weight:800}
+h2{font-size:1.05rem;font-weight:700}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px;min-width:0}
+.btn{font:600 .92rem var(--f-body);min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--sunk)}
+.btn-primary{background:var(--bar);border-color:var(--bar);color:var(--on-bar)}
+.btn-primary:hover{background:var(--bar-strong);border-color:var(--bar-strong)}
+:focus-visible{outline:3px solid var(--bar);outline-offset:2px}
+.gate{min-height:100vh;display:grid;place-items:center;padding:16px}
+.gate .card{width:100%;max-width:400px;display:grid;gap:14px}
+.input{font:500 1rem var(--f-body);width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-align:center;letter-spacing:.06em;direction:ltr}
+.err{background:var(--danger-soft);color:var(--danger);padding:10px 14px;border-radius:12px;font-size:.9rem}
+.head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.head .acts{display:flex;gap:8px}
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:12px}
+.tile b{display:block;font-family:var(--f-display);font-size:2.1rem;font-weight:800;line-height:1.2}
+.tile.hero{background:var(--bar-soft)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));margin-top:12px}
+.sub{margin-top:2px;margin-bottom:16px}
+.hb{display:grid;grid-template-columns:minmax(92px,auto) 1fr 3.2em;gap:6px 10px;align-items:center}
+.hb .lb{font-size:.9rem;white-space:nowrap}
+.hb .tr{height:20px;display:flex;border-radius:4px;background:var(--sunk)}
+.hb .fl{background:var(--bar);border-radius:4px;min-width:2px}
+.hb .fl:hover{background:var(--bar-strong)}
+.hb .vl{font-size:.9rem;font-weight:600;text-align:left}
+.days{display:flex;align-items:flex-end;gap:2px;height:150px;border-bottom:1px solid var(--line);direction:ltr}
+.days .d{flex:1;height:100%;display:flex;align-items:flex-end;min-width:0}
+.days .d i{display:block;width:100%;background:var(--bar);border-radius:4px 4px 0 0}
+.days .d:hover i{background:var(--bar-strong)}
+.axis{display:flex;justify-content:space-between;margin-top:6px;direction:ltr}
+.pulse{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.pulse h3{font:600 .92rem var(--f-body);margin:0 0 4px}
+.pulse svg{display:block;width:100%;height:auto;direction:ltr}
+.pulse .gl{stroke:var(--line);stroke-width:1}
+.pulse .ln{fill:none;stroke:var(--bar);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.pulse .mk{fill:var(--bar);stroke:var(--surface);stroke-width:2}
+.pulse text{fill:var(--muted);font-size:11px;font-family:var(--f-body)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{text-align:right;font-weight:600;color:var(--muted);font-size:.84rem}
+th,td{padding:8px 6px;border-bottom:1px solid var(--line)}
+td.n,th.n{text-align:left}
+tr:last-child td{border-bottom:0}
+.none{padding:22px 12px;text-align:center;color:var(--muted);background:var(--sunk);border-radius:12px;font-size:.92rem}
+.note{margin-top:18px}
+#tip{position:fixed;z-index:9;pointer-events:none;background:var(--ink);color:var(--paper);padding:5px 10px;border-radius:8px;font-size:.84rem;max-width:240px;transform:translate(-50%,calc(-100% - 8px))}
+</style>
+</head>
+<body>
+<main class="gate" id="gate">
+  <form class="card" id="gateF">
+    <h1>لوحة آصِرة</h1>
+    <p class="muted small">أدخل مفتاح اللوحة لعرض الإحصاءات.</p>
+    <label class="small" for="key">مفتاح اللوحة</label>
+    <input class="input" id="key" type="password" autocomplete="off" required>
+    <div class="err" id="gateErr" role="alert" hidden></div>
+    <button class="btn btn-primary" type="submit" id="gateBtn">دخول</button>
+  </form>
+</main>
+
+<div class="wrap" id="board" hidden>
+  <header class="head">
+    <div><h1>لوحة آصِرة</h1><p class="muted small" id="stamp" aria-live="polite"></p></div>
+    <div class="acts"><button class="btn" type="button" id="refresh">تحديث</button><button class="btn" type="button" id="out">خروج</button></div>
+  </header>
+  <div class="err" id="boardErr" role="alert" hidden style="margin-bottom:12px"></div>
+  <section class="tiles" id="tiles" aria-label="الأرقام الرئيسية"></section>
+  <section class="card">
+    <h2>التسجيل اليومي</h2>
+    <p class="muted small sub">عدد الأسر الجديدة في آخر 30 يومًا</p>
+    <div id="days"></div>
+  </section>
+  <div class="grid">
+    <section class="card"><h2>احتياج الأسر حسب المسار</h2><p class="muted small sub">متوسط درجة الاحتياج من 100، والأعلى يعني احتياجًا أكبر</p><div id="need"></div></section>
+    <section class="card"><h2>المسار المقترح</h2><p class="muted small sub">عدد الأسر التي اقتُرح لها كل مسار</p><div id="primary"></div></section>
+    <section class="card"><h2>إنجاز الأنشطة حسب المسار</h2><p class="muted small sub">عدد الأنشطة التي أنهتها الأسر</p><div id="pathDone"></div></section>
+    <section class="card"><h2>أكثر الأنشطة إنجازًا</h2><p class="muted small sub">أعلى 5 أنشطة</p><div id="top"></div></section>
+    <section class="card"><h2>تقييم الأنشطة</h2><p class="muted small sub">رأي الأسر بعد إنهاء النشاط</p><div id="ratings"></div></section>
+    <section class="card"><h2>استخدام الأدوات</h2><p class="muted small sub">المجموع عبر كل الأسر</p><div id="tools"></div></section>
+  </div>
+  <section class="card" style="margin-top:12px">
+    <h2>نبض الأسرة</h2>
+    <p class="muted small sub">متوسط التقييم الأسبوعي من 1 إلى 5، لآخر 8 أسابيع (أرقام الأسابيع أسفل كل رسم)</p>
+    <div id="pulse"></div>
+  </section>
+  <p class="muted small note">الأرقام تشمل الأسر التي أنشأت رمز الأسرة فقط. الأسر التي تستخدم الموقع بدون رمز تبقى بياناتها على أجهزتها ولا تُحسب هنا. لا تعرض اللوحة أسماء أو رموزًا أو نصوصًا كتبتها الأسر.</p>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+const BACKEND={url:"https://jhkcxjrgqamijzzlxdzh.supabase.co",key:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impoa2N4anJncWFtaWp6emx4ZHpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NjQ5ODAsImV4cCI6MjEwOTA0MDk4MH0.BcIx4rEPH-0X5Ua6hSq_B-h2be6AJlvZwsAarGzo5SM"};
+const STORE="asira.dash.key";
+const PATHS=[["screen","خلف الشاشة"],["talk","بيننا كلام"],["sanad","سَنَد"],["time","وقتنا يجمعنا"],["bridge","جسر الأجيال"],["agree","نتفاهم"],["kind","كلمة طيبة"],["decide","قرارنا واحد"]];
+const ACT={s1:"سفرة بلا جوالات",s2:"جولة لعب بلا شاشات",s3:"مشية المساء",t1:"سؤال العشاء",t2:"دقيقة لكل واحد",t3:"أعِد ما سمعت",n1:"ترتيب ركن معًا",n2:"وجبة من صنعنا",n3:"تبادل مهمة",m1:"تحدي حلى سريع",m2:"نزهة قريبة",m3:"قصة جماعية",b1:"لعبة أيام زمان",b2:"درس من الأبناء",b3:"صورة وقصة",a1:"الحوار الهادئ",a2:"قواعد نقاشنا",a3:"تبادل المواقف",k1:"بطاقة شكر",k2:"دائرة التقدير",k3:"مفاجأة صغيرة",d1:"نزهة الأسبوع",d2:"وجبات الأسبوع",d3:"مجلس الأسرة"};
+const ACT_PATH={s:"screen",t:"talk",n:"sanad",m:"time",b:"bridge",a:"agree",k:"kind",d:"decide"};
+const $=s=>document.querySelector(s);
+const N=v=>{const n=Number(v);return Number.isFinite(n)&&n>0?n:0};
+const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+const NONE='<div class="none">لا توجد بيانات بعد</div>';
+const store={get(){try{return localStorage.getItem(STORE)}catch(e){return null}},set(v){try{localStorage.setItem(STORE,v)}catch(e){}},del(){try{localStorage.removeItem(STORE)}catch(e){}}};
+let KEY=null, timer=null;
+
+async function fetchStats(key){
+  const r=await fetch(BACKEND.url+"/rest/v1/rpc/asira_stats",{method:"POST",headers:{"Content-Type":"application/json",apikey:BACKEND.key,Authorization:"Bearer "+BACKEND.key},body:JSON.stringify({p_key:key})});
+  if(r.status===401||r.status===403){const e=new Error("denied");e.denied=true;throw e}
+  if(!r.ok)throw new Error("http "+r.status);
+  return r.json();
+}
+
+// same rule the app uses to pick a family's path
+function primaryOf(list){
+  if(!list.length)return null;
+  const sc=PATHS.map(([id])=>[id,sum(list,a=>N(a[id]))/list.length]);
+  const top=sc.slice().sort((a,b)=>b[1]-a[1])[0];
+  return top[1]<50?"time":top[0];
+}
+
+function bars(rows,scale){
+  const max=Math.max(...rows.map(r=>r[1]),0);
+  if(!max)return NONE;
+  const top=scale||max;
+  return '<div class="hb">'+rows.map(([l,v])=>`<span class="lb">${l}</span><span class="tr">${v?`<span class="fl" style="width:${v/top*100}%" data-tip="${l}: ${v}"></span>`:""}</span><span class="vl num">${v}</span>`).join("")+"</div>";
+}
+function table(rows,head){
+  return `<table><thead><tr><th scope="col">${head[0]}</th><th scope="col" class="n">${head[1]}</th></tr></thead><tbody>`+rows.map(([l,v])=>`<tr><td>${l}</td><td class="n num">${v}</td></tr>`).join("")+"</tbody></table>";
+}
+function dayKey(d){const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
+function drawDays(F){
+  const counts={};F.forEach(f=>{const k=dayKey(new Date(f.created));counts[k]=(counts[k]||0)+1});
+  const days=[];for(let i=29;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+  const vals=days.map(d=>counts[dayKey(d)]||0),max=Math.max(...vals);
+  if(!max){$("#days").innerHTML=NONE;return}
+  const lbl=d=>d.getDate()+"/"+(d.getMonth()+1);
+  $("#days").innerHTML='<div class="days">'+days.map((d,i)=>`<div class="d" data-tip="${lbl(d)}: ${vals[i]} أسرة"><i style="height:${vals[i]?Math.max(vals[i]/max*100,3):0}%"></i></div>`).join("")+`</div><div class="axis muted small num"><span>${lbl(days[0])}</span><span>${lbl(days[29])}</span></div>`;
+}
+function drawPulse(F){
+  const entries=F.flatMap(f=>f.pulse).filter(p=>/^\d{4}-W\d{1,2}$/.test(p.week||""));
+  const weeks=[...new Set(entries.map(p=>p.week))].sort().slice(-8);
+  if(!weeks.length){$("#pulse").innerHTML=NONE;return}
+  const W=300,H=130,L=20,R=12,T=10,B=22;
+  const X=i=>weeks.length===1?(L+W-R)/2:L+i*(W-L-R)/(weeks.length-1), Y=v=>T+(5-v)*(H-T-B)/4;
+  const avg=(w,k)=>{const es=entries.filter(p=>p.week===w);return Math.round(sum(es,p=>N(p[k]))/es.length*10)/10};
+  $("#pulse").innerHTML='<div class="pulse">'+[["comm","التواصل"],["coop","التعاون"],["time","الوقت المشترك"]].map(([k,name])=>{
+    const pts=weeks.map((w,i)=>({w,x:X(i),y:Y(avg(w,k)),v:avg(w,k),n:+w.split("-W")[1]}));
+    return `<div><h3>${name} <span class="muted num">${pts[pts.length-1].v}</span></h3><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${name}: ${pts.map(p=>"الأسبوع "+p.n+" "+p.v).join("، ")}">`+
+      [1,3,5].map(v=>`<line class="gl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="4" y="${Y(v)+4}">${v}</text>`).join("")+
+      `<polyline class="ln" points="${pts.map(p=>p.x+","+p.y).join(" ")}"/>`+
+      pts.map(p=>`<circle class="mk" cx="${p.x}" cy="${p.y}" r="5" data-tip="الأسبوع ${p.n}: ${p.v}"/><circle cx="${p.x}" cy="${p.y}" r="14" fill="transparent" data-tip="الأسبوع ${p.n}: ${p.v}"/>`).join("")+
+      `<text x="${pts[0].x}" y="${H-5}" text-anchor="middle">${pts[0].n}</text>`+(pts.length>1?`<text x="${pts[pts.length-1].x}" y="${H-5}" text-anchor="middle">${pts[pts.length-1].n}</text>`:"")+
+      "</svg></div>"}).join("")+"</div>";
+}
+
+function render(raw){
+  const F=(Array.isArray(raw)?raw:[]).map(f=>({created:f.created,updated:f.updated,members:N(f.members),assess:Array.isArray(f.assess)?f.assess:[],done:(Array.isArray(f.done)?f.done:[]).filter(id=>ACT[id]),ratings:f.ratings&&typeof f.ratings==="object"?f.ratings:{},pulse:Array.isArray(f.pulse)?f.pulse:[],tasks:N(f.tasks),tasksDone:N(f.tasksDone),thanks:N(f.thanks),mirror:N(f.mirror),timerMin:N(f.timerMin),surprises:N(f.surprises),lab:N(f.lab)}));
+  const week=Date.now()-7*864e5;
+  const members=sum(F,f=>f.members),answered=sum(F,f=>f.assess.length),done=sum(F,f=>f.done.length);
+  const active=F.filter(f=>new Date(f.updated).getTime()>=week).length;
+  const pct=members?Math.min(100,Math.round(answered/members*100)):0;
+  const tile=(l,v,h,hero)=>`<div class="card tile${hero?" hero":""}"><span class="small muted">${l}</span><b class="num">${v}</b>${h?`<span class="small muted">${h}</span>`:""}</div>`;
+  $("#tiles").innerHTML=tile("الأسر المسجلة",F.length,"",true)+tile("نشطة آخر 7 أيام",active,F.length?Math.round(active/F.length*100)+"% من الأسر":"")+tile("الأفراد",members,F.length?"بمتوسط "+(Math.round(members/F.length*10)/10)+" لكل أسرة":"")+tile("أكملوا التقييم",answered,members?pct+"% من الأفراد":"")+tile("أنشطة منجزة",done,F.length?"بمتوسط "+(Math.round(done/F.length*10)/10)+" لكل أسرة":"");
+  drawDays(F);
+  const all=F.flatMap(f=>f.assess);
+  $("#need").innerHTML=all.length?bars(PATHS.map(([id,n])=>[n,Math.round(sum(all,a=>N(a[id]))/all.length)]).sort((a,b)=>b[1]-a[1]),100):NONE;
+  const prim={};F.forEach(f=>{const p=primaryOf(f.assess);if(p)prim[p]=(prim[p]||0)+1});
+  $("#primary").innerHTML=bars(PATHS.map(([id,n])=>[n,prim[id]||0]).sort((a,b)=>b[1]-a[1]));
+  const byAct={};F.forEach(f=>f.done.forEach(id=>byAct[id]=(byAct[id]||0)+1));
+  const pd={};Object.entries(byAct).forEach(([id,c])=>{const p=ACT_PATH[id[0]];pd[p]=(pd[p]||0)+c});
+  $("#pathDone").innerHTML=bars(PATHS.map(([id,n])=>[n,pd[id]||0]).sort((a,b)=>b[1]-a[1]));
+  const top=Object.entries(byAct).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([id,c])=>[ACT[id],c]);
+  $("#top").innerHTML=top.length?table(top,["النشاط","مرات الإنجاز"]):NONE;
+  const rc={good:0,long:0,no:0};F.forEach(f=>Object.values(f.ratings).forEach(v=>{if(v in rc)rc[v]++}));
+  $("#ratings").innerHTML=bars([["مناسب",rc.good],["طويل علينا",rc.long],["لم يناسبنا",rc.no]]);
+  $("#tools").innerHTML=table([["مهام مكتملة من المهام المضافة",sum(F,f=>f.tasksDone)+" من "+sum(F,f=>f.tasks)],["بطاقات الشكر",sum(F,f=>f.thanks)],["جلسات مرآة الحوار",sum(F,f=>f.mirror)],["جولات مختبر الأسرة",sum(F,f=>f.lab)],["مفاجآت منفذة",sum(F,f=>f.surprises)],["دقائق بلا شاشات",sum(F,f=>f.timerMin)]],["الأداة","المجموع"]);
+  drawPulse(F);
+  $("#stamp").textContent="آخر تحديث "+new Date().toLocaleTimeString("ar-SA-u-nu-latn",{hour:"numeric",minute:"2-digit"});
+}
+
+function showBoard(){$("#gate").hidden=true;$("#board").hidden=false;clearInterval(timer);timer=setInterval(load,60000)}
+function showGate(msg){clearInterval(timer);KEY=null;store.del();$("#board").hidden=true;$("#gate").hidden=false;$("#key").value="";const e=$("#gateErr");e.textContent=msg||"";e.hidden=!msg}
+async function load(){
+  const e=$("#boardErr");
+  try{render(await fetchStats(KEY));e.hidden=true}
+  catch(err){if(err.denied)showGate("انتهت صلاحية المفتاح، أدخله مرة أخرى");else{e.textContent="تعذّر تحديث البيانات. تحقق من الاتصال، أو تأكد أن مشروع Supabase يعمل.";e.hidden=false}}
+}
+$("#gateF").addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const k=$("#key").value.trim(),b=$("#gateBtn"),e=$("#gateErr");if(!k)return;
+  b.disabled=true;e.hidden=true;
+  try{const d=await fetchStats(k);KEY=k;store.set(k);render(d);showBoard()}
+  catch(err){e.textContent=err.denied?"المفتاح غير صحيح":"تعذّر الاتصال. حاول مرة أخرى.";e.hidden=false}
+  finally{b.disabled=false}
+});
+$("#refresh").addEventListener("click",load);
+$("#out").addEventListener("click",()=>showGate());
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&KEY)load()});
+
+const tip=$("#tip");
+document.addEventListener("pointermove",e=>{
+  const t=e.target.closest&&e.target.closest("[data-tip]");
+  if(!t){tip.hidden=true;return}
+  tip.textContent=t.dataset.tip;tip.hidden=false;
+  tip.style.left=Math.max(70,Math.min(innerWidth-70,e.clientX))+"px";tip.style.top=e.clientY+"px";
+});
+
+(async()=>{const k=store.get();if(!k)return;$("#key").value=k;$("#gateF").requestSubmit()})();
+</script>
+</body>
+</html>
