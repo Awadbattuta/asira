@@ -127,9 +127,15 @@ tr:last-child td{border-bottom:0}
     <section class="card"><h2>المسار المقترح</h2><p class="muted small sub">عدد الأسر التي اقتُرح لها كل مسار</p><div id="primary"></div></section>
     <section class="card"><h2>إنجاز الأنشطة حسب المسار</h2><p class="muted small sub">عدد الأنشطة التي أنهتها الأسر</p><div id="pathDone"></div></section>
     <section class="card"><h2>أكثر الأنشطة إنجازًا</h2><p class="muted small sub">أعلى 5 أنشطة</p><div id="top"></div></section>
-    <section class="card"><h2>تقييم الأنشطة</h2><p class="muted small sub">رأي الأسر بعد إنهاء النشاط</p><div id="ratings"></div></section>
+    <section class="card"><h2>تقييم الأنشطة بالنجوم</h2><p class="muted small sub" id="starsSub">عدد التقييمات لكل عدد نجوم</p><div id="ratings"></div></section>
+    <section class="card"><h2>المشكلات الأكثر اختيارًا</h2><p class="muted small sub">عدد الأسر التي اختارت كل مشكلة في «اعرض مشكلتك»</p><div id="probs"></div></section>
     <section class="card"><h2>استخدام الأدوات</h2><p class="muted small sub">المجموع عبر كل الأسر</p><div id="tools"></div></section>
   </div>
+  <section class="card" style="margin-top:12px">
+    <h2>قياس التحسن</h2>
+    <p class="muted small sub">مقارنة بين أول قياس وآخر قياس، للأسر التي أعادت الأسئلة. الرقم الأقل أفضل.</p>
+    <div id="improve"></div>
+  </section>
   <section class="card" style="margin-top:12px">
     <h2>نبض الأسرة</h2>
     <p class="muted small sub">متوسط التقييم الأسبوعي من 1 إلى 5، لآخر 8 أسابيع (أرقام الأسابيع أسفل كل رسم)</p>
@@ -144,6 +150,8 @@ const BACKEND={url:"https://jhkcxjrgqamijzzlxdzh.supabase.co",key:"eyJhbGciOiJIU
 const STORE="asira.dash.key";
 const PATHS=[["screen","خلف الشاشة"],["talk","بيننا كلام"],["sanad","سَنَد"],["time","وقتنا يجمعنا"],["bridge","جسر الأجيال"],["agree","نتفاهم"],["kind","كلمة طيبة"],["decide","قرارنا واحد"]];
 const ACT={s1:"سفرة بلا جوالات",s2:"جولة لعب بلا شاشات",s3:"مشية المساء",t1:"سؤال العشاء",t2:"دقيقة لكل واحد",t3:"أعِد ما سمعت",n1:"ترتيب ركن معًا",n2:"وجبة من صنعنا",n3:"تبادل مهمة",m1:"تحدي حلى سريع",m2:"نزهة قريبة",m3:"قصة جماعية",b1:"لعبة أيام زمان",b2:"درس من الأبناء",b3:"صورة وقصة",a1:"الحوار الهادئ",a2:"قواعد نقاشنا",a3:"تبادل المواقف",k1:"بطاقة شكر",k2:"دائرة التقدير",k3:"مفاجأة صغيرة",d1:"نزهة الأسبوع",d2:"وجبات الأسبوع",d3:"مجلس الأسرة"};
+const PROB={stubborn:"عناد الأبناء",phones:"الإدمان على الجوال والشاشات",talk:"قلة الحوار في البيت",fights:"كثرة الخلافات والصراخ",chores:"عدم المساعدة في البيت",gap:"فجوة بين الأبناء والوالدين",time:"قلة الوقت معًا",decide:"قرارات تُتخذ بدون مشاورة"};
+const PATH_IDS=["screen","talk","sanad","time","bridge","agree","kind","decide"];
 const ACT_PATH={s:"screen",t:"talk",n:"sanad",m:"time",b:"bridge",a:"agree",k:"kind",d:"decide"};
 const $=s=>document.querySelector(s);
 const N=v=>{const n=Number(v);return Number.isFinite(n)&&n>0?n:0};
@@ -203,25 +211,39 @@ function drawPulse(F){
 }
 
 function render(raw){
-  const F=(Array.isArray(raw)?raw:[]).map(f=>({created:f.created,updated:f.updated,members:N(f.members),assess:Array.isArray(f.assess)?f.assess:[],done:(Array.isArray(f.done)?f.done:[]).filter(id=>ACT[id]),ratings:f.ratings&&typeof f.ratings==="object"?f.ratings:{},pulse:Array.isArray(f.pulse)?f.pulse:[],tasks:N(f.tasks),tasksDone:N(f.tasksDone),thanks:N(f.thanks),mirror:N(f.mirror),timerMin:N(f.timerMin),surprises:N(f.surprises),lab:N(f.lab)}));
+  const F=(Array.isArray(raw)?raw:[]).map(f=>({created:f.created,updated:f.updated,members:N(f.members),assess:Array.isArray(f.assess)?f.assess:[],done:(Array.isArray(f.done)?f.done:[]).filter(id=>ACT[id]),ratings:f.ratings&&typeof f.ratings==="object"?f.ratings:{},pulse:Array.isArray(f.pulse)?f.pulse:[],stars:f.stars&&typeof f.stars==="object"?f.stars:{},checks:Array.isArray(f.checks)?f.checks:[],pairs:Array.isArray(f.pairs)?f.pairs:[],focus:f.focus&&PROB[f.focus.pid]&&PATH_IDS.includes(f.focus.path)?f.focus:null,tasks:N(f.tasks),tasksDone:N(f.tasksDone),thanks:N(f.thanks),mirror:N(f.mirror),timerMin:N(f.timerMin),surprises:N(f.surprises),lab:N(f.lab)}));
   const week=Date.now()-7*864e5;
   const members=sum(F,f=>f.members),answered=sum(F,f=>f.assess.length),done=sum(F,f=>f.done.length);
   const active=F.filter(f=>new Date(f.updated).getTime()>=week).length;
   const pct=members?Math.min(100,Math.round(answered/members*100)):0;
+  const starVals=F.flatMap(f=>Object.values(f.stars).map(Number).filter(v=>v>=1&&v<=5)),starN=starVals.length,starSum=sum(starVals,v=>v);
   const tile=(l,v,h,hero)=>`<div class="card tile${hero?" hero":""}"><span class="small muted">${l}</span><b class="num">${v}</b>${h?`<span class="small muted">${h}</span>`:""}</div>`;
-  $("#tiles").innerHTML=tile("الأسر المسجلة",F.length,"",true)+tile("نشطة آخر 7 أيام",active,F.length?Math.round(active/F.length*100)+"% من الأسر":"")+tile("الأفراد",members,F.length?"بمتوسط "+(Math.round(members/F.length*10)/10)+" لكل أسرة":"")+tile("أكملوا التقييم",answered,members?pct+"% من الأفراد":"")+tile("أنشطة منجزة",done,F.length?"بمتوسط "+(Math.round(done/F.length*10)/10)+" لكل أسرة":"");
+  $("#tiles").innerHTML=tile("الأسر المسجلة",F.length,"",true)+tile("نشطة آخر 7 أيام",active,F.length?Math.round(active/F.length*100)+"% من الأسر":"")+tile("الأفراد",members,F.length?"بمتوسط "+(Math.round(members/F.length*10)/10)+" لكل أسرة":"")+tile("أكملوا التقييم",answered,members?pct+"% من الأفراد":"")+tile("أنشطة منجزة",done,F.length?"بمتوسط "+(Math.round(done/F.length*10)/10)+" لكل أسرة":"")+tile("متوسط النجوم",starN?(Math.round(starSum/starN*10)/10)+" من 5":"—",starN?"من "+starN+" تقييم":"");
   drawDays(F);
   const all=F.flatMap(f=>f.assess);
   $("#need").innerHTML=all.length?bars(PATHS.map(([id,n])=>[n,Math.round(sum(all,a=>N(a[id]))/all.length)]).sort((a,b)=>b[1]-a[1]),100):NONE;
-  const prim={};F.forEach(f=>{const p=primaryOf(f.assess);if(p)prim[p]=(prim[p]||0)+1});
+  const prim={};F.forEach(f=>{const p=f.focus?f.focus.path:primaryOf(f.assess);if(p)prim[p]=(prim[p]||0)+1});
   $("#primary").innerHTML=bars(PATHS.map(([id,n])=>[n,prim[id]||0]).sort((a,b)=>b[1]-a[1]));
   const byAct={};F.forEach(f=>f.done.forEach(id=>byAct[id]=(byAct[id]||0)+1));
   const pd={};Object.entries(byAct).forEach(([id,c])=>{const p=ACT_PATH[id[0]];pd[p]=(pd[p]||0)+c});
   $("#pathDone").innerHTML=bars(PATHS.map(([id,n])=>[n,pd[id]||0]).sort((a,b)=>b[1]-a[1]));
   const top=Object.entries(byAct).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([id,c])=>[ACT[id],c]);
   $("#top").innerHTML=top.length?table(top,["النشاط","مرات الإنجاز"]):NONE;
-  const rc={good:0,long:0,no:0};F.forEach(f=>Object.values(f.ratings).forEach(v=>{if(v in rc)rc[v]++}));
-  $("#ratings").innerHTML=bars([["مناسب",rc.good],["طويل علينا",rc.long],["لم يناسبنا",rc.no]]);
+  const long=sum(F,f=>Object.values(f.ratings).filter(v=>v==="long").length);
+  $("#ratings").innerHTML=bars([5,4,3,2,1].map(n=>[n===1?"نجمة واحدة":n===2?"نجمتان":n+" نجوم",starVals.filter(v=>v===n).length]));
+  $("#starsSub").textContent="عدد التقييمات لكل عدد نجوم"+(long?"، واختارت الأسر «كان طويلًا علينا» "+long+" مرة":"");
+  const pc={};F.forEach(f=>{if(f.focus)pc[f.focus.pid]=(pc[f.focus.pid]||0)+1});
+  $("#probs").innerHTML=bars(Object.entries(PROB).map(([id,n])=>[n,pc[id]||0]).sort((a,b)=>b[1]-a[1]));
+  const avgOf=a=>a.length?Math.round(sum(a,v=>v)/a.length):0;
+  const fa=F.map(f=>f.focus).filter(x=>x&&Number.isFinite(+x.after)&&x.after!==null);
+  const pairs=F.flatMap(f=>f.pairs).filter(x=>x&&x.a&&x.b);
+  const pAvg=(k)=>avgOf(pairs.map(x=>sum(PATH_IDS,id=>N(x[k][id]))/PATH_IDS.length));
+  const ch=F.flatMap(f=>f.checks).filter(c=>c&&[0,1,2].includes(+c.v));
+  const imp=[];
+  if(fa.length)imp.push(["حجم المشكلة (اعرض مشكلتك) · "+fa.length+" أسرة",avgOf(fa.map(x=>N(x.sev)))+"% ← "+avgOf(fa.map(x=>N(x.after)))+"%"]);
+  if(pairs.length)imp.push(["متوسط الاحتياج (التقييم العام) · "+pairs.length+" فرد",pAvg("b")+"% ← "+pAvg("a")+"%"]);
+  if(ch.length)imp.push(["شعروا بتحسن بعد النشاط",Math.round(ch.filter(c=>+c.v>=1).length/ch.length*100)+"% من "+ch.length+" إجابة"]);
+  $("#improve").innerHTML=imp.length?table(imp,["المقياس","قبل ← بعد"]):NONE;
   $("#tools").innerHTML=table([["مهام مكتملة من المهام المضافة",sum(F,f=>f.tasksDone)+" من "+sum(F,f=>f.tasks)],["بطاقات الشكر",sum(F,f=>f.thanks)],["جلسات مرآة الحوار",sum(F,f=>f.mirror)],["جولات مختبر الأسرة",sum(F,f=>f.lab)],["مفاجآت منفذة",sum(F,f=>f.surprises)],["دقائق بلا شاشات",sum(F,f=>f.timerMin)]],["الأداة","المجموع"]);
   drawPulse(F);
   $("#stamp").textContent="آخر تحديث "+new Date().toLocaleTimeString("ar-SA-u-nu-latn",{hour:"numeric",minute:"2-digit"});

@@ -418,6 +418,62 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 .step-list li.now{background:var(--emerald-soft);color:var(--ink);font-weight:600}
 .step-list li.now .sn{background:var(--ink);color:var(--paper)}
 .now-box{background:var(--sunk);border-radius:var(--r-sm);padding:16px}
+
+/* how-to, step bar and panels */
+.how{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.how li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.how b{display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:var(--emerald);color:var(--on-emerald);font-family:var(--f-display);font-size:1.1rem;margin-bottom:12px}
+.how h3{font-size:1.1rem}
+.how p{color:var(--muted);font-size:.94rem;margin-top:4px}
+@media (max-width:860px){.how{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.how{grid-template-columns:1fr}}
+.stepper-wrap{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:40;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-block:1px solid var(--line)}
+.stepper{display:flex;gap:6px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+.stepper::-webkit-scrollbar{display:none}
+.st{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:7px 14px 7px 10px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem;border:1.5px solid transparent;flex:0 0 auto}
+.st:hover{color:var(--ink);background:var(--sunk)}
+.st .sn{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--sunk);color:var(--muted);font-size:.85rem}
+.st .sn svg{width:14px;height:14px}
+.st.done .sn{background:var(--emerald-soft);color:var(--emerald-strong)}
+.st.on{background:var(--emerald-soft);color:var(--emerald-strong);border-color:var(--emerald)}
+.st.on .sn{background:var(--emerald);color:var(--on-emerald)}
+@media (max-width:620px){.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:8px 0}.st{flex-direction:column;gap:4px;padding:6px 2px;font-size:.76rem;border-radius:12px;justify-content:center}}
+.panel{padding-block:40px 64px}
+.step-next{display:flex;justify-content:flex-end;margin-top:28px}
+/* choosing how to start, and problems */
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+@media (max-width:620px){.modes{grid-template-columns:1fr}}
+.mode,.prob{text-align:right;display:grid;gap:6px;border:1.5px solid var(--line);background:var(--paper);border-radius:var(--r-sm);padding:18px;cursor:pointer;color:var(--ink);font:inherit}
+.mode:hover,.prob:hover{border-color:var(--emerald)}
+.mode b{font-family:var(--f-display);font-size:1.15rem}
+.mode span{color:var(--muted);font-size:.94rem}
+.probs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.prob{font-weight:600;padding:14px 16px;min-height:56px;align-content:center}
+.prob.other{border-style:dashed;color:var(--muted)}
+/* stars and finish screen */
+.rate{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+.stars{display:inline-flex;gap:0;direction:ltr}
+.star{background:none;border:none;cursor:pointer;padding:4px;min-width:44px;min-height:44px;color:color-mix(in srgb,var(--muted) 40%,transparent)}
+.star svg{width:30px;height:30px;fill:currentColor}
+.star.on{color:var(--sun)}
+.act .rate{justify-content:flex-start;margin-top:8px}
+.act .star{min-width:36px;min-height:36px}
+.act .star svg{width:22px;height:22px}
+.fin-block{display:grid;gap:10px;justify-items:center;margin-top:20px}
+/* before / after */
+.legend{display:flex;gap:16px;margin-bottom:10px;color:var(--muted)}
+.legend i,.pairs i{display:block;border-radius:4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:10px}
+.pairs{display:grid;gap:12px}
+.pr{display:grid;grid-template-columns:minmax(96px,auto) minmax(0,1fr) auto;gap:12px;align-items:center}
+.pb{display:grid;gap:3px}
+.pairs i{height:10px}
+.legend i.b,.pairs i.b{background:color-mix(in srgb,var(--muted) 45%,transparent)}
+.legend i.a,.pairs i.a{background:var(--emerald)}
+hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
+/* congratulations card */
+.cert-cv{width:100%;max-width:360px;height:auto;border-radius:12px;box-shadow:var(--shadow);margin-inline:auto;display:block;background:#fff}
 </style>
 
 <div id="app" dir="rtl" lang="ar">
@@ -429,16 +485,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
       آصِرة
     </a>
     <nav class="nav" id="nav" aria-label="أقسام الصفحة">
-      <a href="#family">الأسرة</a>
-      <a href="#assess">التقييم</a>
-      <a href="#paths">المسارات</a>
-      <a href="#tools">الأدوات</a>
-      <a href="#progress">التقدم</a>
-      <a href="#impact">الأثر</a>
-      <a href="#plan">الخطة</a>
+      <a href="#how">كيف تعمل</a>
+      <a href="#family">أسرتنا</a>
+      <a href="#assess">مسارنا</a>
+      <a href="#paths">الأنشطة</a>
+      <a href="#progress">إنجازنا</a>
+      <a href="#about">عن آصِرة</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">القائمة</button>
-    <a class="btn btn-primary btn-sm btn-cta" href="#family">ابدأ الآن</a>
+    <a class="btn btn-primary btn-sm btn-cta" href="#journey">ابدأ الآن</a>
   </div>
 </header>
 
@@ -452,10 +507,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
         <svg class="thread" viewBox="0 0 300 28" preserveAspectRatio="none" aria-hidden="true"><path d="M296 14 C 250 2, 220 26, 170 14 S 90 2, 60 14 S 20 24, 4 12"/></svg>
       </h1>
       <p class="tagline">لأن القرب يصنع الفرق</p>
-      <p class="lead">مساحة رقمية تجمع أسرتك على أجهزتكم كلها. يجيب كل فرد عن 8 أسئلة، ثم يقترح آصِرة أنشطة قصيرة وألعابًا تطبقونها معًا.</p>
+      <p class="lead">آصِرة تساعد أسرتك على الحوار والتعاون وقضاء وقت أجمل معًا، بأنشطة قصيرة تطبقونها في البيت.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#family">أنشئ مساحة أسرتك</a>
-        <a class="btn btn-ghost" href="#tools">جرّب مرآة الحوار</a>
+        <a class="btn btn-primary" href="#journey">ابدأ رحلة أسرتك</a>
+        <a class="btn btn-ghost" href="#how">كيف تستخدم آصِرة؟</a>
       </div>
       <div class="facts">
         <span><b>لمن:</b> الطلاب وأسرهم</span>
@@ -495,39 +550,33 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
   </div>
 </section>
 
-<section class="band" id="idea">
+<section id="how">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">الفكرة</span>
-      <h2>أدوات تطبقونها معًا، لا نصائح تقرؤونها</h2>
+      <span class="eyebrow">كيف تعمل آصِرة</span>
+      <h2>4 خطوات بسيطة</h2>
+      <p>الهدف: أسرة تتحدث أكثر، وتتعاون أكثر، وتقضي وقتًا أجمل معًا. آصِرة لا تعطيكم نصائح تقرؤونها، بل أنشطة تطبقونها.</p>
     </div>
-    <div class="idea-grid">
-      <div><h3>يفهم قبل أن يقترح</h3><p>كل فرد يجيب بمفرده، ويُبنى مسار الأسرة من إجابات الجميع.</p></div>
-      <div><h3>أنشطة قصيرة وواضحة</h3><p>كل نشاط 3 خطوات مع مؤقت، من 5 إلى 30 دقيقة.</p></div>
-      <div><h3>يتكيّف معكم</h3><p>قيّموا كل نشاط، فتصبح الاقتراحات القادمة أنسب لكم.</p></div>
-    </div>
+    <ol class="how">
+      <li><b>1</b><h3>سجّلوا أسرتكم</h3><p>اكتبوا أسماء أفراد الأسرة. ولأكثر من جهاز، أنشئوا رمز الأسرة.</p></li>
+      <li><b>2</b><h3>اعرفوا مساركم</h3><p>اعرضوا مشكلة تريدون حلها، أو أجيبوا عن 8 أسئلة سريعة.</p></li>
+      <li><b>3</b><h3>نفّذوا الأنشطة</h3><p>3 أنشطة قصيرة في كل مسار، ثم قيّموها بالنجوم.</p></li>
+      <li><b>4</b><h3>شاهدوا التحسن</h3><p>أعيدوا الأسئلة بعد المسار، واجمعوا 3 أوسمة لتحصلوا على بطاقة تهنئة.</p></li>
+    </ol>
+    <a class="btn btn-primary" href="#journey" style="margin-top:28px">ابدأ الآن</a>
   </div>
 </section>
 
-<section id="journey">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">كيف يعمل</span><h2>أربع خطوات</h2></div>
-    <ol class="steps four">
-      <li><h3>مساحة الأسرة</h3><p>أنشئ رمزًا وشاركه مع أسرتك.</p></li>
-      <li><h3>التقييم</h3><p>كل فرد يجيب عن 8 أسئلة من جهازه.</p></li>
-      <li><h3>الأنشطة</h3><p>نفّذوا أنشطة مساركم خطوة بخطوة.</p></li>
-      <li><h3>الأثر</h3><p>نبض أسبوعي وشارات توضح التغيّر.</p></li>
-    </ol>
-  </div>
-</section>
+<div id="journey">
+<div class="stepper-wrap"><div class="wrap"><nav class="stepper" id="stepper" aria-label="خطوات الرحلة"></nav></div></div>
 
 <!-- FAMILY -->
-<section id="family" style="padding-top:0">
+<section class="panel" id="family">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">الخطوة الأولى</span>
-      <h2>مساحة أسرتك</h2>
-      <p>أنشئ رمز الأسرة وشاركه، ليرى كل فرد نفس المساحة من جهازه وتتحدث مباشرة.</p>
+      <span class="eyebrow">الخطوة 1 من 4</span>
+      <h2>أسرتنا</h2>
+      <p>اكتبوا أسماءكم أولًا. ولاستخدام آصِرة على أكثر من جهاز، أنشئوا رمز الأسرة وشاركوه.</p>
     </div>
     <div class="fam-grid">
       <div class="station" id="syncBox"></div>
@@ -551,36 +600,40 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
         </div>
       </div>
     </div>
+    <div class="step-next"><a class="btn btn-primary" href="#assess">التالي: اعرفوا مساركم</a></div>
   </div>
 </section>
 
 <!-- ASSESSMENT -->
-<section id="assess" style="background:var(--sunk)">
+<section class="panel" id="assess" hidden>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">التقييم</span>
-      <h2>8 أسئلة لكل فرد</h2>
-      <p>كل فرد يجيب بمفرده، من جهازه أو بالتناوب على جهاز واحد. إجاباتك خاصة بك، وتظهر للأسرة النتيجة المشتركة فقط.</p>
+      <span class="eyebrow">الخطوة 2 من 4</span>
+      <h2>اعرفوا مساركم</h2>
+      <p>اعرضوا مشكلة تريدون حلها، أو أجيبوا عن 8 أسئلة عامة. إجاباتك خاصة بك، والأسرة ترى النتيجة المشتركة فقط.</p>
     </div>
     <div class="station quiz" id="quiz" style="max-width:820px"></div>
+    <div class="step-next"><a class="btn btn-primary" href="#paths">التالي: الأنشطة</a></div>
   </div>
 </section>
 
 <!-- PATHS -->
-<section id="paths">
+<section class="panel" id="paths" hidden>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">المسارات الثمانية</span>
-      <h2>3 أنشطة قصيرة وأداة في كل مسار</h2>
+      <span class="eyebrow">الخطوة 3 من 4</span>
+      <h2>الأنشطة</h2>
+      <p>ابدؤوا بالمسار المقترح لكم، وهو المعلَّم «مسار الأسرة». كل مسار 3 أنشطة قصيرة وأداة.</p>
     </div>
     <div class="paths" id="pathGrid"></div>
+    <div class="step-next"><a class="btn btn-primary" href="#progress">التالي: إنجازنا</a></div>
   </div>
 </section>
 
 <!-- TOOLS -->
-<section id="tools" style="background:var(--sunk)">
+<section class="panel" id="tools" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">الأدوات التفاعلية</span><h2>ما يميز آصِرة</h2></div>
+    <div class="sec-head"><span class="eyebrow">أدوات إضافية</span><h2>ألعاب وأدوات للأسرة</h2><p>استخدموها في أي وقت، مع المسار أو بدونه.</p></div>
     <div class="tabs" role="tablist" aria-label="الأدوات">
       <button class="tab" role="tab" data-tab="mirror" aria-selected="true">مرآة الحوار</button>
       <button class="tab" role="tab" data-tab="lab" aria-selected="false">مختبر الأسرة</button>
@@ -647,11 +700,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </section>
 
 <!-- PROGRESS -->
-<section id="progress">
+<section class="panel" id="progress" hidden>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">التقدم</span>
-      <h2>ما أنجزته أسرتك</h2>
+      <span class="eyebrow">الخطوة 4 من 4</span>
+      <h2>إنجازنا</h2>
+      <p>تابعوا ما أنجزتموه، وقيسوا التحسن، واجمعوا 3 أوسمة لتحصلوا على بطاقة التهنئة.</p>
     </div>
     <div class="stats" id="stats"></div>
     <div class="note green" style="margin-top:14px" id="adaptNote"></div>
@@ -664,91 +718,44 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
       <div class="station">
         <h3 style="font-size:1.2rem;margin-bottom:12px">الشارات</h3>
         <div class="badges" id="badges"></div>
+        <div id="certBox" style="margin-top:16px"></div>
       </div>
+    </div>
+    <div class="station" style="margin-top:20px">
+      <h3 style="font-size:1.2rem">قياس التحسن</h3>
+      <p class="small muted" style="margin-bottom:14px">مقارنة بين أول إجابة وآخر إجابة.</p>
+      <div id="improve"></div>
     </div>
     <div class="row" style="margin-top:20px">
       <button class="btn btn-ghost btn-sm" id="copySummary" type="button">انسخ ملخص التقدم</button>
       <button class="btn btn-ghost btn-sm" id="resetAll" type="button">مسح بيانات هذا الجهاز</button>
       <span id="resetConfirm" hidden class="row" style="align-items:center"><span class="small" id="resetMsg">متأكد؟ لا يمكن التراجع.</span><button class="btn btn-sm" style="background:var(--danger);color:#fff" id="resetYes" type="button">نعم، امسح</button><button class="btn btn-ghost btn-sm" id="resetNo" type="button">إلغاء</button></span>
     </div>
+    <div class="step-next"><a class="btn btn-ghost" href="#tools">أدوات إضافية للأسرة</a></div>
   </div>
 </section>
+</div>
 
 <!-- IMPACT -->
-<section class="band" id="impact">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">قياس الأثر</span>
-      <h2>تجربة ميدانية لأربعة أسابيع</h2>
-      <p>25 إلى 30 أسرة متطوعة بعد موافقة المدرسة والأسر. يرى المشرف إحصاءات إجمالية فقط.</p>
-    </div>
-    <div class="kpis">
-      <div class="kpi"><b>30</b><span>أسرة مشاركة</span></div>
-      <div class="kpi"><b>120</b><span>نشاطًا مكتملًا</span></div>
-      <div class="kpi"><b>78%</b><span>رضا المشاركين</span></div>
-      <div class="kpi"><b>4</b><span>أسابيع</span></div>
-    </div>
-    <p class="small muted" style="margin-top:10px">أرقام افتراضية لتوضيح شكل اللوحة، وليست نتائج.</p>
-    <div class="impact-grid">
-      <div><h3>جودة التواصل</h3><p class="muted">استبانة قبل وبعد، ونبض أسبوعي.</p></div>
-      <div><h3>المشاركة</h3><p class="muted">عدد الأنشطة المنجزة وتنوعها.</p></div>
-      <div><h3>الرضا</h3><p class="muted">تقييم كل نشاط بعد إنهائه.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRIVACY -->
-<section id="privacy">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">الخصوصية</span><h2>صُمم للطلاب وأسرهم</h2></div>
-    <div class="priv">
-      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>بلا حسابات</h3><p>لا بريد ولا كلمة مرور. يكفي رمز الأسرة، ولا تراه المدرسة.</p></div>
-      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>إجاباتك لك</h3><p>تقييمك ونبضك لا يظهران لأحد، والأسرة ترى المتوسط فقط.</p></div>
-      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>ذكاء اصطناعي بموافقتك</h3><p>لا يُرسل أي نص لنموذج ذكاء اصطناعي إلا إذا فعّلته بنفسك.</p></div>
-    </div>
-    <div class="note" style="margin-top:24px">إذا شعرت بعدم الأمان، تحدث مع شخص بالغ تثق به أو مع الموجه الطلابي. خط مساندة الطفل <b class="num">116111</b>، وبلاغات العنف الأسري <b class="num">1919</b>.</div>
-  </div>
-</section>
-
-<!-- PLAN -->
-<section id="plan" style="background:var(--sunk)">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">خطة العمل</span><h2>من الفكرة إلى المسابقة</h2></div>
-    <div class="plan-grid">
-      <ol class="stages">
+<section id="about" style="background:var(--sunk)">
+  <div class="wrap" style="max-width:860px">
+    <div class="sec-head"><span class="eyebrow">عن آصِرة</span><h2>أسئلة شائعة</h2></div>
+    <details><summary>ما هدف آصِرة؟</summary><p>آصِرة جزء من مشروع القيم التربوية «أسرتي سعادتي». هدفها تقوية الروابط داخل الأسرة بالحوار والتعاون والوقت المشترك، بأنشطة عملية قصيرة بدل النصائح.</p></details>
+    <details><summary>هل يرى والداي إجاباتي؟</summary><p>لا. تُحفظ نتيجتك فقط دون إجاباتك، ويظهر للأسرة مسار مشترك محسوب من نتائج الجميع.</p></details>
+    <details><summary>كيف نستخدمها على أكثر من جهاز؟</summary><p>أنشئ رمز الأسرة في خطوة «أسرتنا»، ثم يدخل بقية الأفراد الرمز نفسه من أجهزتهم. كل التعديلات تظهر للجميع خلال ثوانٍ.</p></details>
+    <details><summary>ماذا لو لم يناسبنا نشاط؟</summary><p>أعطوه نجمة أو نجمتين، أو اختاروا «كان طويلًا علينا»، فتتغير الاقتراحات القادمة.</p></details>
+    <details><summary>كيف نحصل على بطاقة التهنئة؟</summary><p>اجمعوا أي 3 أوسمة، فتظهر البطاقة تلقائيًا. اكتب اسمك، ثم احفظها وأرسلها لمجموعة المدرسة على واتساب.</p></details>
+    <details><summary>الخصوصية</summary><p>بلا حسابات ولا بريد ولا كلمة مرور، ويكفي رمز الأسرة. لا تُحفظ إجاباتك نفسها، ولا يُرسل أي نص لنموذج ذكاء اصطناعي إلا إذا فعّلته بنفسك.</p></details>
+    <details><summary>خطة العمل</summary>
+      <ol class="stages" style="margin-top:10px">
         <li><span>1</span><div><b>المتطلبات والتصميم</b><p>الأسئلة والمميزات والهوية البصرية</p></div></li>
         <li><span>2</span><div><b>البناء</b><p>مساحة الأسرة، التقييم، الأدوات</p></div></li>
-        <li><span>3</span><div><b>الذكاء الاصطناعي</b><p>توصيات وأنشطة آمنة</p></div></li>
-        <li><span>4</span><div><b>الاختبار</b><p>الخصوصية والأخطاء وسهولة الاستخدام</p></div></li>
-        <li><span>5</span><div><b>التجربة الميدانية</b><p>أسر متطوعة وقياس النتائج</p></div></li>
-        <li><span>6</span><div><b>التقديم للمسابقة</b><p>العرض والشواهد والتوصيات</p></div></li>
+        <li><span>3</span><div><b>الاختبار</b><p>الخصوصية والأخطاء وسهولة الاستخدام</p></div></li>
+        <li><span>4</span><div><b>التجربة الميدانية</b><p>أسر متطوعة وقياس النتائج قبل وبعد</p></div></li>
+        <li><span>5</span><div><b>التقديم للمسابقة</b><p>العرض والشواهد والتوصيات</p></div></li>
       </ol>
-      <div>
-        <h3 style="font-size:1.3rem;margin-bottom:12px">الأولويات</h3>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>الأولوية</th><th>الوظيفة</th></tr></thead>
-            <tbody>
-              <tr><td><span class="pill ok">أساسية</span></td><td>مساحة الأسرة على عدة أجهزة</td></tr>
-              <tr><td><span class="pill ok">أساسية</span></td><td>التقييم لكل فرد ومسار الأسرة</td></tr>
-              <tr><td><span class="pill ok">أساسية</span></td><td>مرآة الحوار ومختبر الأسرة</td></tr>
-              <tr><td><span class="pill ok">أساسية</span></td><td>الأنشطة الموجّهة وقياس الأثر</td></tr>
-              <tr><td><span class="pill warn">إضافية</span></td><td>المساعد الذكي والشارات</td></tr>
-              <tr><td><span class="pill">مستقبلية</span></td><td>التوسع إلى مدارس أخرى</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap" style="max-width:860px">
-    <div class="sec-head"><span class="eyebrow">أسئلة شائعة</span><h2>قبل أن تبدأ</h2></div>
-    <details><summary>كيف نستخدمه على أكثر من جهاز؟</summary><p>أنشئ رمز الأسرة من جهاز واحد، ثم يدخل بقية الأفراد الرمز نفسه من أجهزتهم. كل التعديلات تظهر للجميع خلال ثوانٍ.</p></details>
-    <details><summary>هل يرى والداي إجاباتي؟</summary><p>لا. تُحفظ نتيجتك فقط دون إجاباتك، ويظهر للأسرة مسار مشترك محسوب من نتائج الجميع.</p></details>
-    <details><summary>ماذا لو لم يناسبنا نشاط؟</summary><p>اختاروا «طويل علينا» أو «لم يناسبنا» بعد إنهائه، فتتغير الاقتراحات القادمة.</p></details>
+    </details>
+    <div class="note" style="margin-top:24px">إذا شعرت بعدم الأمان، تحدث مع شخص بالغ تثق به أو مع الموجه الطلابي. خط مساندة الطفل <b class="num">116111</b>، وبلاغات العنف الأسري <b class="num">1919</b>.</div>
   </div>
 </section>
 
@@ -800,8 +807,8 @@ const CHECK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke=
 // ?d=2 gives a window its own device storage, so a second "device" can be tried in one browser
 let DEVQ="";try{DEVQ=(new URLSearchParams(location.search).get("d")||"").replace(/[^a-z0-9]/gi,"").slice(0,8)}catch(e){}
 const KEY="asira.v2"+(DEVQ?"."+DEVQ:""), LKEY="asira.local.v2"+(DEVQ?"."+DEVQ:"");
-const blank=()=>({family:{name:"",members:[]},assess:{},done:{},ratings:{},pref:{maxMin:null},tasks:[],thanks:[],pulse:[],vote:{q:"",opts:[],votes:{},voters:[]},mirror:0,timerMin:0,surprises:0,lab:0,running:null});
-const lblank=()=>({me:null,code:null,ver:0,base:null,quiz:null,dev:uid()});
+const blank=()=>({family:{name:"",members:[]},assess:{},done:{},ratings:{},pref:{maxMin:null},tasks:[],thanks:[],pulse:[],vote:{q:"",opts:[],votes:{},voters:[]},mirror:0,timerMin:0,surprises:0,lab:0,running:null,stars:{},checks:[],focus:null,base:{},measured:{}});
+const lblank=()=>({me:null,code:null,ver:0,base:null,quiz:null,dev:uid(),step:null,cert3:false,remeasure:null});
 let S=blank(), L=lblank();
 try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(blank(),JSON.parse(r))}catch(e){}
 try{const r=localStorage.getItem(LKEY);if(r)L=Object.assign(lblank(),JSON.parse(r))}catch(e){}
@@ -955,6 +962,28 @@ const ACTS=[
 ];
 const A=Object.fromEntries(ACTS.map(a=>[a.id,a]));
 const PER_PATH=3;
+// what each path improves, used in the question after every activity
+const AREA={screen:"التوازن مع الشاشات",talk:"الحوار بينكم",sanad:"التعاون في البيت",time:"وقتكم معًا",bridge:"التفاهم بين الأجيال",agree:"التعامل مع الخلاف",kind:"التقدير بينكم",decide:"المشاركة في القرار"};
+// "describe your problem": two severity questions (options ordered from best to worst) and one question that picks between two paths
+const PROBLEMS=[
+ {id:"stubborn",t:"عناد الأبناء",paths:["agree","bridge"],why:["يتكرر الاختلاف عندكم، ومسار «نتفاهم» يعطيكم طريقة هادئة لحله خطوة بخطوة.","يبدو أن العناد سببه فجوة بين جيلين، ومسار «جسر الأجيال» يقرّب بين الأبناء والوالدين."],
+  q:[{q:"كم مرة يرفض الأبناء طلبًا بسيطًا؟",o:["نادرًا","أحيانًا","كثيرًا"]},{q:"هل ينتهي الرفض بنقاش حاد أو صراخ؟",o:["لا","أحيانًا","غالبًا"]},{q:"ما الأقرب لسبب العناد في رأيكم؟",o:["نختلف ولا نعرف كيف نتفاهم","يشعرون أننا لا نفهم جيلهم"]}]},
+ {id:"phones",t:"الإدمان على الجوال والشاشات",paths:["screen","time"],why:["تحتاجون وقتًا بلا أجهزة، ومسار «خلف الشاشة» يبدأ بخطوات بسيطة مثل سفرة بلا جوالات.","تحتاجون بديلًا ممتعًا عن الشاشة، ومسار «وقتنا يجمعنا» يقترح أنشطة تناسبكم."],
+  q:[{q:"كم ساعة يقضيها أغلب أفراد الأسرة على الشاشات يوميًا خارج الدراسة؟",o:["أقل من ساعتين","من ساعتين إلى أربع","أكثر من أربع"]},{q:"هل تُستخدم الجوالات أثناء الأكل أو الجلسات العائلية؟",o:["نادرًا","أحيانًا","غالبًا"]},{q:"ماذا ينقصكم أكثر؟",o:["وقت بلا أجهزة","أنشطة ممتعة نفعلها معًا"]}]},
+ {id:"talk",t:"قلة الحوار في البيت",paths:["talk","bridge"],why:["مسار «بيننا كلام» يفتح الحوار بأسئلة خفيفة يجيب عنها الجميع.","الحوار يقل بين الأبناء والوالدين، ومسار «جسر الأجيال» يقرّب بينهما."],
+  q:[{q:"كم مرة تتحدثون معًا عن يومكم؟",o:["يوميًا","أحيانًا","نادرًا"]},{q:"هل يتردد أحد في مشاركة ما يزعجه؟",o:["لا","أحيانًا","كثيرًا"]},{q:"أين يقل الحوار أكثر؟",o:["بين الجميع","بين الأبناء والوالدين"]}]},
+ {id:"fights",t:"كثرة الخلافات والصراخ",paths:["agree","kind"],why:["مسار «نتفاهم» يعلّمكم تمرين حوار هادئ من ثلاث خطوات للخلافات.","كلمات التقدير تخفف التوتر، ومسار «كلمة طيبة» يبدأ ببطاقات شكر بينكم."],
+  q:[{q:"كم مرة تحدث خلافات بصوت مرتفع؟",o:["نادرًا","كل أسبوع","كل يوم تقريبًا"]},{q:"هل يعتذر أحد بعد الخلاف؟",o:["غالبًا","أحيانًا","نادرًا"]},{q:"ما الذي يساعدكم أكثر؟",o:["طريقة هادئة لحل الخلاف","كلمات تقدير تخفف التوتر"]}]},
+ {id:"chores",t:"عدم المساعدة في البيت",paths:["sanad","decide"],why:["مسار «سَنَد» يوزع المهام على الجميع ويتابعها حتى تكتمل.","عندما يختار الجميع المهام معًا يلتزمون بها أكثر، وهذا ما يقدمه مسار «قرارنا واحد»."],
+  q:[{q:"كم مرة يساعد الأبناء في أعمال البيت دون طلب؟",o:["غالبًا","أحيانًا","نادرًا"]},{q:"هل تقع أغلب المهام على شخص واحد؟",o:["لا","أحيانًا","نعم"]},{q:"ما الأنسب لكم؟",o:["توزيع مهام ومتابعتها","أن يشارك الجميع في اختيار المهام"]}]},
+ {id:"gap",t:"فجوة بين الأبناء والوالدين",paths:["bridge","talk"],why:["مسار «جسر الأجيال» يجعل كل جيل يتعرف على عالم الآخر.","تحتاجون حديثًا يوميًا أكثر، ومسار «بيننا كلام» يفتح الحوار بسهولة."],
+  q:[{q:"هل يشعر الأبناء أن الوالدين لا يفهمون اهتماماتهم؟",o:["نادرًا","أحيانًا","كثيرًا"]},{q:"هل يشارك الوالدان قصص طفولتهم مع الأبناء؟",o:["غالبًا","أحيانًا","نادرًا"]},{q:"ماذا تريدون أكثر؟",o:["أن نتعرف على عالم بعضنا","أن نتحدث أكثر عن يومنا"]}]},
+ {id:"time",t:"قلة الوقت معًا",paths:["time","screen"],why:["مسار «وقتنا يجمعنا» يقترح أنشطة تناسب وقتكم ومكانكم.","الأجهزة تأخذ وقتكم، ومسار «خلف الشاشة» يعيده لكم."],
+  q:[{q:"كم مرة تقضون وقتًا ممتعًا معًا في الأسبوع؟",o:["3 مرات أو أكثر","مرة أو مرتين","نادرًا"]},{q:"هل يمر يوم كامل دون أن تجلسوا معًا؟",o:["نادرًا","أحيانًا","كثيرًا"]},{q:"ما السبب الأكبر؟",o:["لا نعرف ماذا نفعل معًا","الأجهزة تأخذ وقتنا"]}]},
+ {id:"decide",t:"قرارات تُتخذ بدون مشاورة",paths:["decide","agree"],why:["مسار «قرارنا واحد» يعطي كل فرد صوتًا في القرارات البسيطة.","النقاش يتحول إلى خلاف، ومسار «نتفاهم» يساعدكم على النقاش بهدوء."],
+  q:[{q:"هل يُسأل الأبناء عن رأيهم في قرارات الأسرة؟",o:["غالبًا","أحيانًا","نادرًا"]},{q:"هل يشعر أحد أن رأيه لا يهم؟",o:["لا","أحيانًا","كثيرًا"]},{q:"ماذا تحتاجون أكثر؟",o:["طريقة بسيطة للتصويت","أن نتناقش دون خلاف"]}]}
+];
+const PB=Object.fromEntries(PROBLEMS.map(p=>[p.id,p]));
 
 const SURPRISES=[
  {t:"اكتب رسالة شكر قصيرة لأحد والديك وضعها حيث سيراها.",min:5,p:"kind"},
@@ -1032,12 +1061,46 @@ function pickPaths(sc){
   const order=PATHS.map(p=>p.id).sort((a,b)=>sc[b]-sc[a]);
   return sc[order[0]]<50?{primary:"time",extras:["kind","talk"],calm:true,scores:sc}:{primary:order[0],extras:order.slice(1,3),calm:false,scores:sc};
 }
-function familyResult(){
+function familyResult(generalOnly){
   const list=members().map(m=>S.assess[m.id]).filter(Boolean);
-  if(!list.length)return null;
-  const sc={};PATHS.forEach(p=>sc[p.id]=Math.round(list.reduce((s,a)=>s+(a.scores[p.id]||0),0)/list.length));
-  return Object.assign(pickPaths(sc),{count:list.length});
+  let r=null;
+  if(list.length){const sc={};PATHS.forEach(p=>sc[p.id]=Math.round(list.reduce((s,a)=>s+(a.scores[p.id]||0),0)/list.length));r=Object.assign(pickPaths(sc),{count:list.length})}
+  const F=S.focus,pb=F&&PB[F.pid];
+  if(generalOnly||!pb||!P[F.path])return r;
+  // a problem the family chose wins over the general assessment
+  const extras=[...pb.paths,...(r?[r.primary,...r.extras]:["kind","talk"])].filter((x,i,a)=>x!==F.path&&a.indexOf(x)===i).slice(0,2);
+  return {primary:F.path,extras,calm:false,scores:r?r.scores:Object.fromEntries(PATHS.map(p=>[p.id,0])),count:r?r.count:0,focus:true};
 }
+
+/* ---------- steps ---------- */
+const STEPS=[["family","أسرتنا"],["assess","مسارنا"],["paths","الأنشطة"],["progress","إنجازنا"],["tools","الأدوات"]];
+const isStep=id=>STEPS.some(s=>s[0]===id);
+const badgeCount=()=>BADGES.filter(([,f])=>f()).length;
+function stepDone(id){
+  if(id==="family")return members().length>0;
+  if(id==="assess")return !!familyResult();
+  if(id==="paths")return Object.keys(S.done).length>0;
+  if(id==="progress")return badgeCount()>=3;
+  return false;
+}
+let step=null;
+function renderStepper(){
+  $("#stepper").innerHTML=STEPS.map(([id,n],i)=>{const on=id===step,d=stepDone(id);
+    return `<a href="#${id}" class="st ${on?"on":""} ${d?"done":""}" ${on?'aria-current="step"':""}><span class="sn">${d&&!on?CHECK:i<4?i+1:"+"}</span>${n}</a>`}).join("");
+}
+function goStep(id,scroll){
+  if(!isStep(id))return;
+  step=id;$$("#journey .panel").forEach(p=>p.hidden=p.id!==id);
+  L.step=id;saveLocal();renderStepper();
+  if(scroll)$("#journey").scrollIntoView({behavior:"smooth"});
+}
+const firstStep=()=>isStep(L.step)?L.step:(STEPS.slice(0,4).find(([id])=>!stepDone(id))||["progress"])[0];
+document.addEventListener("click",e=>{
+  const a=e.target.closest('a[href^="#"]');if(!a)return;
+  const id=a.getAttribute("href").slice(1);
+  if(isStep(id)){e.preventDefault();goStep(id,true)}
+  else if(id==="journey"){e.preventDefault();goStep(step||firstStep(),true)}
+});
 
 /* ---------- nav ---------- */
 $("#menuBtn").addEventListener("click",e=>{const o=$("#nav").classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",o)});
@@ -1082,7 +1145,7 @@ $("#famForm").addEventListener("submit",e=>{
   if(!L.me)L.me=m.id;
   $("#memName").value="";save();toast("أُضيف "+n);$("#memName").focus();
 });
-$("#memList").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;S.family.members=members().filter(m=>m.id!==b.dataset.del);delete S.assess[b.dataset.del];if(L.me===b.dataset.del)L.me=null;save()});
+$("#memList").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;S.family.members=members().filter(m=>m.id!==b.dataset.del);delete S.assess[b.dataset.del];delete S.base[b.dataset.del];if(L.me===b.dataset.del)L.me=null;save()});
 $("#meSel").addEventListener("change",e=>{L.me=e.target.value||null;saveLocal();refreshAll();renderQuiz();if(L.me)toast("أهلًا "+meName())});
 function renderFamily(){
   if(document.activeElement!==$("#famName"))$("#famName").value=S.family.name||"";
@@ -1098,24 +1161,105 @@ function renderQuiz(){
   const el=$("#quiz");
   if(qView==="q")return renderQuestion();
   if(qView==="result")return renderResult();
-  // start: who answers now?
+  if(qView==="pick")return renderPick();
+  if(qView==="pq")return renderPQ();
+  if(qView==="presult")return renderPResult();
   if(!qWho||!memberById(qWho))qWho=L.me&&memberById(L.me)?L.me:(members().find(m=>!S.assess[m.id])||{}).id||null;
-  const fam=familyResult();
   if(!members().length){
     el.innerHTML=`<h3 style="font-size:1.3rem">أضف اسمك لتبدأ</h3>
      <form class="row" id="qAdd" style="margin-top:12px"><div class="field grow"><label for="qName">الاسم</label><input class="input" id="qName" maxlength="24"></div>
-     <div class="field" style="flex:0 1 120px"><label for="qRole">صلتك</label><select class="input" id="qRole"><option>أب</option><option>أم</option><option selected>ابن</option><option>ابنة</option><option>آخر</option></select></div><button class="btn btn-primary" type="submit">ابدأ</button></form>`;
-    $("#qAdd",el).addEventListener("submit",e=>{e.preventDefault();const n=$("#qName",el).value.trim();if(!n){$("#qName",el).focus();return}const m={id:uid(),name:n,role:$("#qRole",el).value};members().push(m);L.me=m.id;qWho=m.id;save();startQuiz()});
+     <div class="field" style="flex:0 1 120px"><label for="qRole">صلتك</label><select class="input" id="qRole"><option>أب</option><option>أم</option><option selected>ابن</option><option>ابنة</option><option>آخر</option></select></div><button class="btn btn-primary" type="submit">التالي</button></form>`;
+    $("#qAdd",el).addEventListener("submit",e=>{e.preventDefault();const n=$("#qName",el).value.trim();if(!n){$("#qName",el).focus();return}const m={id:uid(),name:n,role:$("#qRole",el).value};members().push(m);L.me=m.id;qWho=m.id;qView="start";save()});
     return;
   }
   const answered=members().filter(m=>S.assess[m.id]).length;
-  el.innerHTML=`<h3 style="font-size:1.3rem">من سيجيب الآن؟</h3>
-   <p class="small muted" style="margin-top:4px">أجاب <span class="num">${answered}</span> من <span class="num">${members().length}</span>.</p>
-   <div class="who-list" style="margin-top:14px">${members().map(m=>`<button type="button" class="who" data-who="${m.id}" aria-pressed="${m.id===qWho}">${esc(labelOf(m))}${m.id===L.me?" <small>(أنت)</small>":""}${S.assess[m.id]?` <small>✓ أجاب</small>`:""}</button>`).join("")}</div>
-   <div class="row" style="margin-top:18px"><button class="btn btn-primary" type="button" id="qGo" ${qWho?"":"disabled"}>${L.quiz&&L.quiz.who===qWho?"تابع من السؤال "+((L.quiz.qi|0)+1):qWho&&S.assess[qWho]?"أعد التقييم":"ابدأ · 8 أسئلة"}</button>${fam?'<button class="btn btn-ghost" type="button" id="qFam">نتيجة الأسرة</button>':""}</div>`;
-  $$("[data-who]",el).forEach(b=>b.addEventListener("click",()=>{qWho=b.dataset.who;renderQuiz()}));
-  $("#qGo",el).addEventListener("click",()=>startQuiz());
-  const f=$("#qFam",el);f&&f.addEventListener("click",()=>{qView="result";renderQuiz()});
+  if(qView==="who"){
+    const rm=L.remeasure&&P[L.remeasure];
+    el.innerHTML=`<div class="q-meta"><span>التقييم العام · 8 أسئلة</span><button class="linkish small" type="button" id="qBack">رجوع</button></div>
+     ${rm?`<div class="note green" style="margin-bottom:14px">أنهيتم مسار «${esc(rm.name)}». أعيدوا الأسئلة لنقيس التحسن، ويجيب كل فرد من جهازه.</div>`:""}
+     <h3 style="font-size:1.3rem">من سيجيب الآن؟</h3>
+     <p class="small muted" style="margin-top:4px">أجاب <span class="num">${answered}</span> من <span class="num">${members().length}</span>.</p>
+     <div class="who-list" style="margin-top:14px">${members().map(m=>`<button type="button" class="who" data-who="${m.id}" aria-pressed="${m.id===qWho}">${esc(labelOf(m))}${m.id===L.me?" <small>(أنت)</small>":""}${S.assess[m.id]?` <small>✓ أجاب</small>`:""}</button>`).join("")}</div>
+     <div class="row" style="margin-top:18px"><button class="btn btn-primary" type="button" id="qGo" ${qWho?"":"disabled"}>${L.quiz&&L.quiz.who===qWho?"تابع من السؤال "+((L.quiz.qi|0)+1):qWho&&S.assess[qWho]?"أعد التقييم":"ابدأ · 8 أسئلة"}</button>${answered?'<button class="btn btn-ghost" type="button" id="qFam">نتيجة التقييم</button>':""}</div>`;
+    $$("[data-who]",el).forEach(b=>b.addEventListener("click",()=>{qWho=b.dataset.who;renderQuiz()}));
+    $("#qGo",el).addEventListener("click",()=>startQuiz());
+    $("#qBack",el).addEventListener("click",()=>{qView="start";renderQuiz()});
+    const f=$("#qFam",el);f&&f.addEventListener("click",()=>{qView="result";renderQuiz()});
+    return;
+  }
+  // start: a specific problem, or the general assessment
+  const F=S.focus,pb=F&&PB[F.pid];
+  el.innerHTML=`<h3 style="font-size:1.3rem">كيف تريدون أن تبدؤوا؟</h3>
+   ${pb&&P[F.path]?`<div class="note green" style="margin-top:12px">مشكلتكم الحالية: <b>${esc(pb.t)}</b> · مساركم: <b>${esc(P[F.path].name)}</b>. <button class="linkish" type="button" id="qFocus">عرض النتيجة</button></div>`:""}
+   <div class="modes">
+     <button type="button" class="mode" id="mProb"><b>عندي مشكلة أريد حلها</b><span>اختاروا المشكلة، وأجيبوا عن 3 أسئلة، ونقترح المسار المناسب.</span></button>
+     <button type="button" class="mode" id="mGen"><b>تقييم عام</b><span>8 أسئلة سريعة لكل فرد. أجاب <span class="num">${answered}</span> من <span class="num">${members().length}</span>.</span></button>
+   </div>`;
+  $("#mProb",el).addEventListener("click",()=>{qView="pick";renderQuiz()});
+  $("#mGen",el).addEventListener("click",()=>{qView="who";renderQuiz()});
+  const ff=$("#qFocus",el);ff&&ff.addEventListener("click",()=>{qView="presult";renderQuiz()});
+}
+let pq=null;
+function renderPick(){
+  const el=$("#quiz");
+  el.innerHTML=`<div class="q-meta"><span>ما المشكلة التي تريدون حلها؟</span><button class="linkish small" type="button" id="qBack">رجوع</button></div>
+   <div class="probs">${PROBLEMS.map(p=>`<button type="button" class="prob" data-prob="${p.id}">${esc(p.t)}</button>`).join("")}<button type="button" class="prob other" id="pOther">مشكلة أخرى</button></div>
+   <p class="small muted" style="margin-top:14px">إذا لم تجدوا مشكلتكم، اختاروا «مشكلة أخرى» لتنتقلوا إلى التقييم العام.</p>`;
+  $$("[data-prob]",el).forEach(b=>b.addEventListener("click",()=>{pq={pid:b.dataset.prob,i:0,ans:[],re:false};qView="pq";renderQuiz();focusQuiz()}));
+  $("#pOther",el).addEventListener("click",()=>{qView="who";renderQuiz()});
+  $("#qBack",el).addEventListener("click",()=>{qView="start";renderQuiz()});
+}
+function renderPQ(){
+  const el=$("#quiz"),pb=pq&&PB[pq.pid];
+  if(!pb){qView="start";return renderQuiz()}
+  const n=pq.re?2:3,Q=pb.q[pq.i];
+  el.innerHTML=`<div class="q-meta"><span>${esc(pb.t)}${pq.re?" · قياس التحسن":""} · السؤال <span class="num">${pq.i+1}</span> من <span class="num">${n}</span></span><button class="linkish small" type="button" id="qBack">رجوع</button></div>
+   <div class="bar" aria-hidden="true"><i style="width:${pq.i/n*100}%"></i></div>
+   <h3 class="q-text" id="qt">${esc(Q.q)}</h3>
+   <div class="opts" role="radiogroup" aria-labelledby="qt">${Q.o.map((o,i)=>`<button type="button" class="opt" role="radio" aria-checked="${pq.ans[pq.i]===i}" data-i="${i}"><span class="dot"></span>${esc(o)}</button>`).join("")}</div>
+   <div class="q-nav"><button class="btn btn-ghost" type="button" id="pPrev" ${pq.i?"":"disabled"}>السابق</button></div>`;
+  $$(".opt",el).forEach(b=>b.addEventListener("click",()=>{
+    pq.ans[pq.i]=+b.dataset.i;$$(".opt",el).forEach(x=>x.setAttribute("aria-checked",x===b));
+    setTimeout(()=>{if(!pq)return;if(pq.i<n-1){pq.i++;renderPQ();focusQuiz()}else finishPQ()},180);
+  }));
+  $("#pPrev",el).addEventListener("click",()=>{pq.i--;renderPQ();focusQuiz()});
+  $("#qBack",el).addEventListener("click",()=>{qView=pq.re?"start":"pick";pq=null;renderQuiz()});
+}
+function finishPQ(){
+  const pb=PB[pq.pid],sev=Math.round((pq.ans[0]+pq.ans[1])/4*100);
+  if(pq.re&&S.focus){S.focus.after=sev;S.focus.adate=today();S.measured[S.focus.path]=today()}
+  else S.focus={pid:pb.id,path:pb.paths[pq.ans[2]],sev,date:today()};
+  pq=null;qView="presult";save();renderQuiz();
+  $("#assess").scrollIntoView({behavior:"smooth"});
+}
+function pairRows(items){
+  return `<div class="legend small"><span><i class="b"></i>قبل</span><span><i class="a"></i>بعد</span></div><div class="pairs">${items.map(([n,b,a])=>`<div class="pr"><span class="small">${esc(n)}</span><span class="pb"><i class="b" style="width:${Math.max(3,b)}%"></i><i class="a" style="width:${Math.max(3,a)}%"></i></span><span class="num small">${b}% ← ${a}%</span></div>`).join("")}</div>`;
+}
+function changeMsg(before,after){
+  const d=before-after;
+  return d>0?`تحسن بمقدار <b class="num">${d}%</b>. أحسنتم!`:d===0?"لم يتغير بعد. جربوا أنشطة المسار مرة أخرى أو مسارًا إضافيًا.":"زاد قليلًا. هذا طبيعي أحيانًا، استمروا في الأنشطة وأعيدوا القياس لاحقًا.";
+}
+function renderPResult(){
+  const el=$("#quiz"),F=S.focus,pb=F&&PB[F.pid],p=pb&&P[F.path];
+  if(!p){qView="start";return renderQuiz()}
+  const [l,c]=levelOf(F.sev);
+  el.innerHTML=`<div class="q-meta"><span>نتيجة المشكلة</span><button class="linkish small" type="button" id="qBack">رجوع</button></div>
+   <div class="res-card fam"><span class="eyebrow" style="margin:0">${esc(pb.t)} · مساركم المقترح</span><div class="result-main" style="font-size:1.8rem">${esc(p.name)}</div>
+     <p>${esc(pb.why[Math.max(0,pb.paths.indexOf(F.path))])}</p>
+     ${F.after!=null?`<p class="lbl" style="margin-top:6px">حجم المشكلة قبل المسار وبعده</p>${pairRows([["المشكلة",F.sev,F.after]])}<p class="small">${changeMsg(F.sev,F.after)}</p>`
+       :`<div class="need" style="margin-top:6px"><span>حجم المشكلة الآن</span><span class="track"><i style="width:${Math.max(4,F.sev)}%"></i></span><span class="lvl pill ${c}">${l}</span></div><p class="small muted">بعد إنهاء أنشطة المسار الثلاثة نعيد عليكم أول سؤالين لنقيس التحسن.</p>`}
+   </div>
+   <div class="note" style="margin-top:14px">إذا كانت المشكلة فيها إيذاء أو عنف، تحدث مع شخص بالغ تثق به أو مع الموجه الطلابي، أو اتصل على <b class="num">116111</b>.</div>
+   <div class="row" style="margin-top:18px;align-items:center"><button class="btn btn-primary" type="button" data-open="${p.id}">ابدأ أنشطة المسار</button><button class="btn btn-ghost" type="button" id="pAgain">اختر مشكلة أخرى</button><button class="linkish small" type="button" id="pClear">ألغِ المشكلة واعتمد التقييم العام</button></div>`;
+  $("#pAgain",el).addEventListener("click",()=>{qView="pick";renderQuiz()});
+  $("#qBack",el).addEventListener("click",()=>{qView="start";renderQuiz()});
+  $("#pClear",el).addEventListener("click",()=>{S.focus=null;qView="start";save();toast("ألغينا المشكلة، والمسار الآن من التقييم العام")});
+}
+function remeasure(p){
+  closeModal();goStep("assess",true);
+  if(S.focus&&S.focus.path===p&&PB[S.focus.pid]){pq={pid:S.focus.pid,i:0,ans:[],re:true};qView="pq"}
+  else{L.remeasure=p;qWho=L.me&&memberById(L.me)?L.me:qWho;qView="who"}
+  saveLocal();renderQuiz();
 }
 function startQuiz(){
   // resume an unfinished assessment for the same person on this device
@@ -1138,13 +1282,15 @@ function renderQuestion(){
 function focusQuiz(){const f=$("#quiz .opt[aria-checked=true]")||$("#quiz .opt");f&&f.focus({preventScroll:true})}
 function finishQuiz(){
   const scores={};QUESTIONS.forEach((Q,i)=>scores[Q.p]=qa[i]*50);
-  // only the scores are kept, never the answers themselves
+  // only the scores are kept, never the answers themselves; the first result is kept to measure change
+  if(S.assess[qWho]&&!S.base[qWho])S.base[qWho]=S.assess[qWho];
   S.assess[qWho]={scores,date:today()};L.quiz=null;
+  if(L.remeasure){S.measured[L.remeasure]=today();L.remeasure=null}
   qView="result";save();renderQuiz();
   $("#assess").scrollIntoView({behavior:"smooth"});
 }
 function renderResult(){
-  const el=$("#quiz"),fam=familyResult(),mine=S.assess[qWho]?pickPaths(S.assess[qWho].scores):null,who=memberById(qWho);
+  const el=$("#quiz"),fam=familyResult(true),mine=S.assess[qWho]?pickPaths(S.assess[qWho].scores):null,who=memberById(qWho),F=S.focus&&PB[S.focus.pid];
   const pending=members().filter(m=>!S.assess[m.id]);
   el.innerHTML=`<div class="res-grid">
     ${mine?`<div class="res-card"><span class="eyebrow" style="margin:0">نتيجة ${esc(who?labelOf(who):"")}</span><div class="result-main" style="font-size:1.8rem">${esc(P[mine.primary].name)}</div><p class="small muted">${esc(P[mine.primary].goal)}. ومساران إضافيان: ${mine.extras.map(x=>esc(P[x].name)).join(" و")}.</p><p class="small muted">لا تظهر هذه النتيجة لبقية الأسرة.</p></div>`:""}
@@ -1152,8 +1298,9 @@ function renderResult(){
       <div class="need-list" style="margin-top:6px">${PATHS.slice().sort((a,b)=>fam.scores[b.id]-fam.scores[a.id]).slice(0,4).map(p=>{const v=fam.scores[p.id],[l,c]=levelOf(v);return `<div class="need ${v>=67?"hi":""}"><span>${esc(p.name)}</span><span class="track"><i style="width:${Math.max(4,v)}%"></i></span><span class="lvl pill ${c}">${l}</span></div>`}).join("")}</div>
       ${pending.length?`<p class="small muted">لم يُجب بعد: ${pending.map(m=>esc(labelOf(m))).join("، ")}</p>`:'<p class="small" style="color:var(--emerald-strong);font-weight:600">أجابت الأسرة كلها</p>'}</div>`:""}
    </div>
-   <div class="row" style="margin-top:18px">${fam?`<button class="btn btn-primary" type="button" data-open="${fam.primary}">افتح مسار الأسرة</button>`:""}<button class="btn btn-ghost" type="button" id="qOther">${pending.length?"فرد آخر يجيب الآن":"عودة"}</button></div>`;
-  $("#qOther",el).addEventListener("click",()=>{qView="start";qWho=pending.length?pending[0].id:qWho;renderQuiz()});
+   ${F?`<p class="small muted" style="margin-top:12px">مسار الأسرة الآن يحدده اختياركم لمشكلة «${esc(F.t)}». يمكنكم إلغاؤها من صفحة نتيجة المشكلة.</p>`:""}
+   <div class="row" style="margin-top:18px">${fam?`<button class="btn btn-primary" type="button" data-open="${familyResult().primary}">افتح مسار الأسرة</button>`:""}<button class="btn btn-ghost" type="button" id="qOther">${pending.length?"فرد آخر يجيب الآن":"عودة"}</button></div>`;
+  $("#qOther",el).addEventListener("click",()=>{qView=pending.length?"who":"start";qWho=pending.length?pending[0].id:qWho;renderQuiz()});
 }
 
 /* ---------- paths ---------- */
@@ -1178,12 +1325,14 @@ function openModal(html,init){
   modalCleanup=init?init($("#sheet")):null;
   const c=$("#sheet .close");c&&c.focus();
 }
-function closeModal(){if(modalCleanup)try{modalCleanup()}catch(e){}modalCleanup=null;actsRedraw=null;$("#modal").hidden=true;document.body.style.overflow="";lastFocus&&lastFocus.focus&&lastFocus.focus()}
+function closeModal(){if(modalCleanup)try{modalCleanup()}catch(e){}modalCleanup=null;actsRedraw=null;$("#modal").hidden=true;document.body.style.overflow="";lastFocus&&lastFocus.focus&&lastFocus.focus();if(certPending){certPending=false;setTimeout(openCert,400)}}
 $("#modal").addEventListener("click",e=>{if(e.target.id==="modal"||e.target.closest(".close"))closeModal()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#modal").hidden)closeModal()});
 
 /* ---------- activities: list → step-by-step runner → finish + rating ---------- */
-const rateHTML=(id,r)=>`<div class="rate"><span class="muted">كيف كان؟</span>${[["good","مناسب"],["long","طويل علينا"],["no","لم يناسبنا"]].map(([k,l])=>`<button type="button" class="chip" aria-pressed="${r===k}" data-rate="${id}" data-v="${k}">${l}</button>`).join("")}</div>`;
+const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+const rateHTML=id=>{const st=S.stars[id]|0;
+  return `<div class="rate"><span class="stars" role="group" aria-label="تقييم النشاط من 5">${[1,2,3,4,5].map(n=>`<button type="button" class="star ${n<=st?"on":""}" data-rate="${id}" data-v="${n}" aria-label="${n} من 5" aria-pressed="${n===st}">${STAR}</button>`).join("")}</span><button type="button" class="chip" aria-pressed="${S.ratings[id]==="long"}" data-rate="${id}" data-v="long">كان طويلًا علينا</button></div>`};
 function actHTML(a){
   const d=S.done[a.id], run=S.running&&S.running.id===a.id?S.running:null;
   const status=d?'<span class="pill ok">تم</span>':run?`<span class="pill warn">الخطوة <span class="num">${run.step+1}</span> من 3</span>`:"";
@@ -1192,7 +1341,7 @@ function actHTML(a){
     <span class="chk" aria-hidden="true">${d?CHECK:""}</span>
     <div style="min-width:0"><div class="act-top"><h4>${esc(a.t)}</h4>${status}</div>
     <div class="meta"><span class="num">${a.min}</span> دقيقة · ${a.place==="out"?"خارج البيت":"في البيت"}${a.cost?" · تكلفة بسيطة":""}</div>
-    <div class="row" style="margin-top:8px">${btn}</div>${d?rateHTML(a.id,S.ratings[a.id]):""}</div></div>`;
+    <div class="row" style="margin-top:8px">${btn}</div>${d?rateHTML(a.id):""}</div></div>`;
 }
 let runTimer=null;
 function stopRunTimer(){clearInterval(runTimer);runTimer=null}
@@ -1209,12 +1358,20 @@ function runnerHTML(a){
     <p class="small muted" style="margin-top:10px;text-align:center"><button type="button" class="linkish" id="rnExit">رجوع للأنشطة</button> · سنحفظ مكانك</p></div>`;
 }
 function mountActs(acts,pathId){
-  let finished=null;
+  let finished=null, checked=null;
   const draw=keep=>{
     if(!keep)stopRunTimer();
     if(finished){
-      acts.innerHTML=`<div class="runner" style="text-align:center"><h3 style="font-size:1.4rem">أحسنتم! أنهيتم «${esc(A[finished].t)}»</h3><p class="muted" style="margin-top:6px">قيّموه لتتحسن الاقتراحات القادمة.</p><div style="display:flex;justify-content:center">${rateHTML(finished,S.ratings[finished])}</div><button type="button" class="btn btn-primary" id="rnBack" style="margin-top:14px">رجوع للأنشطة</button></div>`;
-      $("#rnBack",acts).addEventListener("click",()=>{finished=null;draw()});return;
+      const a=A[finished],pth=a.p,all=pathDone(pth)>=PER_PATH&&!S.measured[pth];
+      acts.innerHTML=`<div class="runner" style="text-align:center"><h3 style="font-size:1.4rem">أحسنتم! أنهيتم «${esc(a.t)}»</h3>
+        <div class="fin-block"><p class="lbl">كم نجمة تعطون النشاط؟</p>${rateHTML(finished)}</div>
+        <div class="fin-block"><p class="lbl">سؤال سريع: بعد هذا النشاط، كيف ترون ${esc(AREA[pth])}؟</p>
+          ${checked==null?`<div class="chips" style="justify-content:center">${[[2,"تحسن بوضوح"],[1,"تحسن قليلًا"],[0,"كما هو"]].map(([v,l])=>`<button type="button" class="chip" data-chk="${v}">${l}</button>`).join("")}</div>`:'<p class="small" style="color:var(--emerald-strong);font-weight:600">شكرًا، سجلنا إجابتكم</p>'}</div>
+        ${all?`<div class="note green" style="margin-top:20px;display:grid;gap:10px;justify-items:center">أنهيتم أنشطة المسار كلها! أعيدوا الأسئلة لنقيس التحسن.<button type="button" class="btn btn-primary btn-sm" id="rnMeasure">قيسوا التحسن الآن</button></div>`:""}
+        <button type="button" class="btn ${all?"btn-ghost":"btn-primary"}" id="rnBack" style="margin-top:18px">رجوع للأنشطة</button></div>`;
+      $("#rnBack",acts).addEventListener("click",()=>{finished=null;checked=null;draw()});
+      const m=$("#rnMeasure",acts);m&&m.addEventListener("click",()=>remeasure(pth));
+      return;
     }
     const R=S.running;
     if(R&&R.open&&A[R.id]&&A[R.id].p===pathId&&!S.done[R.id]){
@@ -1222,7 +1379,7 @@ function mountActs(acts,pathId){
       acts.innerHTML=runnerHTML(a);
       const go=n=>{S.running.step=n;S.running.left=null;save();draw()};
       $("#rnPrev",acts).addEventListener("click",()=>go(S.running.step-1));
-      $("#rnNext",acts).addEventListener("click",()=>{if(S.running.step<a.s.length-1)go(S.running.step+1);else{S.done[a.id]=today();S.running=null;finished=a.id;save();draw()}});
+      $("#rnNext",acts).addEventListener("click",()=>{if(S.running.step<a.s.length-1)go(S.running.step+1);else{S.done[a.id]=today();S.running=null;finished=a.id;checked=null;save();draw()}});
       $("#rnExit",acts).addEventListener("click",()=>{S.running.open=false;save();draw()});
       const g=$("#rnGo",acts);
       if(g)g.addEventListener("click",()=>{
@@ -1239,21 +1396,28 @@ function mountActs(acts,pathId){
   acts.addEventListener("click",e=>{
     const b=e.target.closest("[data-run]");
     if(b){const id=b.dataset.run;
-      if(b.dataset.again){delete S.done[id];delete S.ratings[id]}
+      if(b.dataset.again){delete S.done[id];delete S.ratings[id];delete S.stars[id]}
       if(!S.running||S.running.id!==id)S.running={id,step:0,left:null,leftStep:null};
       S.running.open=true;save();draw();acts.scrollIntoView({block:"start",behavior:"smooth"});return}
     const r=e.target.closest("[data-rate]");
-    if(r){rate(r.dataset.rate,r.dataset.v);draw(true)}
+    if(r){rate(r.dataset.rate,r.dataset.v);draw(true);return}
+    const k=e.target.closest("[data-chk]");
+    if(k&&finished){checked=+k.dataset.chk;S.checks.push({id:uid(),a:finished,p:A[finished].p,v:checked,date:today()});save();draw(true)}
   });
   actsRedraw=()=>{if(!runTimer)draw()};
   draw();
   return stopRunTimer;
 }
 function rate(id,v){
-  S.ratings[id]=v;
-  if(v==="long"){S.pref.maxMin=Math.max(5,Math.min(S.pref.maxMin||999,Math.round(A[id].min/2/5)*5||5));toast("سنقترح أنشطة لا تتجاوز "+S.pref.maxMin+" دقيقة")}
-  else if(v==="no")toast("لن نقترح هذا النشاط مرة أخرى");
-  else toast("رائع، سنقترح أنشطة مشابهة");
+  const fromStars=n=>n?(n<=2?"no":"good"):undefined;
+  if(v==="long"){
+    if(S.ratings[id]==="long"){const r=fromStars(S.stars[id]);if(r)S.ratings[id]=r;else delete S.ratings[id]}
+    else{S.ratings[id]="long";S.pref.maxMin=Math.max(5,Math.min(S.pref.maxMin||999,Math.round(A[id].min/2/5)*5||5));toast("سنقترح أنشطة لا تتجاوز "+S.pref.maxMin+" دقيقة")}
+  }else{
+    const n=Math.max(1,Math.min(5,+v));S.stars[id]=n;
+    if(S.ratings[id]!=="long")S.ratings[id]=fromStars(n);
+    toast(n<=2?"لن نقترح هذا النشاط مرة أخرى":n>=4?"رائع، سنقترح أنشطة مشابهة":"شكرًا على تقييمكم");
+  }
   save();
 }
 function openPath(id){
@@ -1685,8 +1849,92 @@ function renderProgress(){
   $("#stats").innerHTML=[[Object.keys(S.done).length,"نشاطًا منجزًا"],[S.mirror,"جلسة حوار"],[S.timerMin,"دقيقة بلا شاشات"],[S.thanks.length,"كلمة طيبة"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   $("#radar").innerHTML=radar();
   $("#badges").innerHTML=BADGES.map(([n,f])=>{const g=f();return `<div class="badge ${g?"got":""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/>${g?'<path d="M9.5 9l2 2 3-3.5"/>':""}</svg>${esc(n)}</div>`}).join("");
-  $("#adaptNote").innerHTML=S.pref.maxMin?`الاقتراحات الآن لا تتجاوز <b class="num">${S.pref.maxMin}</b> دقيقة بناءً على تقييمكم. <button class="linkish" type="button" id="prefReset">ألغِ</button>`:"قيّموا كل نشاط بعد إنهائه، وتتكيّف الاقتراحات معكم.";
+  $("#adaptNote").innerHTML=S.pref.maxMin?`الاقتراحات الآن لا تتجاوز <b class="num">${S.pref.maxMin}</b> دقيقة بناءً على تقييمكم. <button class="linkish" type="button" id="prefReset">ألغِ</button>`:"قيّموا كل نشاط بالنجوم بعد إنهائه، وتتكيّف الاقتراحات معكم.";
   const pr=$("#prefReset");pr&&pr.addEventListener("click",()=>{S.pref.maxMin=null;save()});
+  renderImprove();renderCertBox();
+}
+function renderImprove(){
+  const el=$("#improve");if(!el)return;const out=[];
+  const F=S.focus,pb=F&&PB[F.pid];
+  if(pb&&F.after!=null)out.push(`<div><p class="lbl" style="margin-bottom:8px">${esc(pb.t)}: حجم المشكلة</p>${pairRows([["المشكلة",F.sev,F.after]])}<p class="small" style="margin-top:8px">${changeMsg(F.sev,F.after)}</p></div>`);
+  const ids=members().map(m=>m.id).filter(id=>S.base[id]&&S.assess[id]);
+  if(ids.length){
+    const avg=(src,p)=>Math.round(ids.reduce((s,id)=>s+((src[id].scores||{})[p]||0),0)/ids.length);
+    const rows=PATHS.map(p=>[p.name,avg(S.base,p.id),avg(S.assess,p.id)]).sort((x,y)=>y[1]-x[1]).slice(0,4);
+    const better=PATHS.filter(p=>avg(S.assess,p.id)<avg(S.base,p.id)).length;
+    out.push(`<div><p class="lbl">التقييم العام: الاحتياج في أكثر 4 مسارات</p><p class="small muted" style="margin-bottom:10px">من إجابات <span class="num">${ids.length}</span> ${ids.length===1?"فرد":"أفراد"}. الرقم الأقل أفضل. تحسن الاحتياج في <span class="num">${better}</span> من 8 مسارات.</p>${pairRows(rows)}</div>`);
+  }
+  const ch=S.checks.filter(c=>c&&P[c.p]);
+  if(ch.length){const up=ch.filter(c=>c.v>=1).length;out.push(`<p>بعد <b class="num">${ch.length}</b> ${ch.length===1?"نشاط":"أنشطة"}، شعرتم بتحسن في <b class="num">${up}</b> منها.</p>`)}
+  el.innerHTML=out.length?out.join('<hr class="sep">'):'<p class="empty">أنهوا أنشطة مسار كامل ثم أعيدوا الأسئلة، وسيظهر التحسن هنا.</p>';
+}
+let certPending=false;
+function renderCertBox(){
+  const n=badgeCount(),el=$("#certBox");
+  el.innerHTML=n>=3?`<div class="note green" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>حصلتم على <b class="num">${n}</b> أوسمة، وبطاقة التهنئة جاهزة.</span><button class="btn btn-primary btn-sm" type="button" id="certOpen">بطاقة التهنئة</button></div>`
+    :`<p class="small muted">اجمعوا <b class="num">${3-n}</b> ${3-n===1?"وسامًا آخر":"أوسمة أخرى"} لتحصلوا على بطاقة التهنئة (<span class="num">${n}</span> من 3).</p>`;
+  const b=$("#certOpen",el);b&&b.addEventListener("click",openCert);
+}
+function checkCert(){
+  if(badgeCount()<3||L.cert3)return;
+  L.cert3=true;saveLocal();
+  if($("#modal").hidden)setTimeout(openCert,700);else certPending=true;
+}
+async function drawCert(cv,name){
+  try{await Promise.all([document.fonts.load('800 80px Alexandria'),document.fonts.load('600 40px "IBM Plex Sans Arabic"')])}catch(e){}
+  const x=cv.getContext("2d"),W=cv.width,H=cv.height,got=BADGES.filter(([,f])=>f()).map(([n])=>n);
+  const font=(w,sz,f)=>`${w} ${sz}px ${f==="d"?"Alexandria":'"IBM Plex Sans Arabic"'}, Tahoma, sans-serif`;
+  const fit=(t,w,sz,f,max)=>{x.font=font(w,sz,f);while(sz>28&&x.measureText(t).width>max){sz-=4;x.font=font(w,sz,f)}};
+  const rr=(X,Y,w,h,r)=>{x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath()};
+  x.setTransform(1,0,0,1,0,0);x.direction="rtl";x.textAlign="center";x.textBaseline="alphabetic";
+  x.fillStyle="#FFFFFF";x.fillRect(0,0,W,H);
+  x.fillStyle="#E6F8EF";rr(40,40,W-80,H-80,48);x.fill();
+  x.lineWidth=10;x.strokeStyle="#08965F";rr(40,40,W-80,H-80,48);x.stroke();
+  x.lineWidth=3;x.strokeStyle="#FFB800";rr(66,66,W-132,H-132,34);x.stroke();
+  x.lineWidth=12;x.strokeStyle="#0D1B2A";x.beginPath();x.arc(W/2-34,190,52,0,Math.PI*2);x.stroke();
+  x.strokeStyle="#08965F";x.beginPath();x.arc(W/2+34,190,52,0,Math.PI*2);x.stroke();
+  x.fillStyle="#0D1B2A";x.font=font(800,84,"d");x.fillText("بطاقة تهنئة",W/2,370);
+  x.fillStyle="#556274";x.font=font(500,40);x.fillText("تُهدى إلى",W/2,450);
+  const nm=(name||"").trim()||"اكتب اسمك";
+  x.fillStyle=(name||"").trim()?"#067A4D":"#9AA8BA";fit(nm,800,96,"d",W-220);x.fillText(nm,W/2,575);
+  const fam=(S.family.name||"").trim();
+  x.fillStyle="#0D1B2A";fit(`تقديرًا لجهود ${fam||"الأسرة"} في تقوية روابطها`,600,42,"b",W-200);x.fillText(`تقديرًا لجهود ${fam||"الأسرة"} في تقوية روابطها`,W/2,670);
+  x.font=font(600,42);x.fillText(`والحصول على ${got.length} أوسمة في آصِرة`,W/2,730);
+  x.font=font(600,32);
+  const shown=got.slice(0,8),cols=2,bw=420,bh=64,gap=20,rows=Math.ceil(shown.length/cols),top=Math.round(790+(1110-790-(rows*(bh+16)-16))/2),left=(W-(cols*bw+gap))/2;
+  shown.forEach((b,i)=>{const r=Math.floor(i/cols),c=i%cols,X=W-left-(c+1)*bw-c*gap,Y=top+r*(bh+16);
+    x.fillStyle="#FFF3D1";rr(X,Y,bw,bh,32);x.fill();x.fillStyle="#0D1B2A";x.fillText("★ "+b,X+bw/2,Y+43)});
+  x.fillStyle="#556274";x.font=font(500,32);x.fillText(new Date().toLocaleDateString("ar-SA-u-nu-latn-ca-gregory",{year:"numeric",month:"long",day:"numeric"}),W/2,1170);
+  x.fillStyle="#08965F";x.font=font(700,36,"d");x.fillText("آصِرة · لأن القرب يصنع الفرق",W/2,1232);
+  x.fillStyle="#556274";x.font=font(500,26);x.fillText("مشروع القيم التربوية · أسرتي سعادتي",W/2,1272);
+}
+function openCert(){
+  const me=L.me&&memberById(L.me),n=badgeCount();
+  openModal(`<div class="sheet-head"><div><h2 id="sheetTitle" style="font-size:1.4rem">مبروك! حصلتم على <span class="num">${n}</span> أوسمة</h2><div class="muted small">اكتب اسمك لتظهر بطاقة التهنئة، ثم احفظها وأرسلها لمجموعة المدرسة.</div></div><button class="close" type="button" aria-label="إغلاق">×</button></div>
+   <div class="sheet-body">
+     <div class="field"><label for="cName">اسمك كما تريده في البطاقة</label><input class="input" id="cName" maxlength="40" value="${esc(me?me.name:"")}"></div>
+     <canvas class="cert-cv" id="cCv" width="1080" height="1350" role="img" aria-label="بطاقة التهنئة"></canvas>
+     <div class="row" style="justify-content:center"><button class="btn btn-primary" type="button" id="cSave">حفظ الصورة</button><button class="btn btn-ghost" type="button" id="cShare" hidden>مشاركة إلى واتساب</button></div>
+     <p class="small muted" style="text-align:center">على الجوال: اضغط «مشاركة» واختر واتساب. أو احفظ الصورة وأرسلها من معرض الصور، أو صوّر الشاشة.</p>
+   </div>`,root=>{
+    const cv=$("#cCv",root),inp=$("#cName",root);let t=null;
+    const redraw=()=>drawCert(cv,inp.value);
+    inp.addEventListener("input",()=>{clearTimeout(t);t=setTimeout(redraw,120)});
+    redraw();
+    const blob=()=>new Promise(r=>cv.toBlob(r,"image/png"));
+    $("#cSave",root).addEventListener("click",async()=>{
+      if(!inp.value.trim()){toast("اكتب اسمك أولًا");inp.focus();return}
+      const b=await blob();if(!b)return;const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="asira-card.png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+    });
+    const sh=$("#cShare",root);
+    try{if(navigator.canShare&&navigator.canShare({files:[new File([""],"t.png",{type:"image/png"})]}))sh.hidden=false}catch(e){}
+    sh.addEventListener("click",async()=>{
+      if(!inp.value.trim()){toast("اكتب اسمك أولًا");inp.focus();return}
+      const b=await blob();if(!b)return;
+      try{await navigator.share({files:[new File([b],"asira-card.png",{type:"image/png"})],title:"بطاقة تهنئة آصِرة"})}catch(e){}
+    });
+    return ()=>clearTimeout(t);
+  });
 }
 $("#copySummary").addEventListener("click",()=>{
   const R=familyResult();
@@ -1694,7 +1942,7 @@ $("#copySummary").addEventListener("click",()=>{
 });
 $("#resetAll").addEventListener("click",()=>{$("#resetMsg").textContent=L.code?"سيُمسح ما على هذا الجهاز ويخرج من مساحة الأسرة، وتبقى بيانات الأسرة لبقية الأفراد.":"متأكد؟ لا يمكن التراجع.";$("#resetConfirm").hidden=false;$("#resetAll").hidden=true});
 $("#resetNo").addEventListener("click",()=>{$("#resetConfirm").hidden=true;$("#resetAll").hidden=false});
-$("#resetYes").addEventListener("click",()=>{S=blank();L=lblank();saveLocal();$("#resetConfirm").hidden=true;$("#resetAll").hidden=false;qView="start";qWho=null;setSync("off");renderSync();refreshAll();renderQuiz();toast("مُسحت بيانات هذا الجهاز")});
+$("#resetYes").addEventListener("click",()=>{S=blank();L=lblank();saveLocal();$("#resetConfirm").hidden=true;$("#resetAll").hidden=false;qView="start";qWho=null;pq=null;setSync("off");renderSync();refreshAll();renderQuiz();toast("مُسحت بيانات هذا الجهاز")});
 
 /* ---------- hero mock ---------- */
 function renderMock(){
@@ -1707,12 +1955,13 @@ function renderMock(){
 }
 
 function refreshAll(){
-  renderFamily();renderPaths();renderMock();renderPulse();renderProgress();
-  if(qView==="start"||qView==="result")renderQuiz();
+  renderFamily();renderPaths();renderMock();renderPulse();renderProgress();renderStepper();
+  if(qView!=="q"&&qView!=="pq")renderQuiz();
+  checkCert();
 }
 
 /* ---------- boot ---------- */
-renderSync();refreshAll();renderQuiz();renderMirror();renderGames();renderLab();renderBox();renderBot();
+step=firstStep();goStep(step);renderSync();refreshAll();renderQuiz();renderMirror();renderGames();renderLab();renderBox();renderBot();
 if(L.code){setSync("busy");poll()}
 setTimeout(()=>{if(window.claude&&typeof window.claude.use==="function"&&!$("#botAI"))renderBot()},1500);
 })();
