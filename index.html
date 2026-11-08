@@ -71,6 +71,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-size:1.5rem;font-weight:700}
 .brand svg{width:34px;height:34px;flex:none}
+.brand-txt{display:grid;line-height:1.1}
+.brand-txt small{font-family:var(--f-body);font-size:.74rem;font-weight:600;color:var(--emerald-strong);white-space:nowrap}
 .nav{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
 .nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:.95rem;font-weight:500}
 .nav a:hover{color:var(--ink);background:var(--sunk)}
@@ -115,6 +117,10 @@ section{padding-block:72px}
 .hero-grid::after{width:220px;height:220px;background:var(--coral);opacity:.14;left:32%;bottom:-120px}
 .hero-grid > *{position:relative;z-index:1;min-width:0}
 .hero h1{font-size:clamp(3.6rem,10vw,7rem);font-weight:800;line-height:1.05;color:var(--ink);position:relative;display:inline-block;letter-spacing:-.01em}
+.hero-title{display:flex;flex-wrap:wrap;align-items:center;gap:0 clamp(14px,3vw,28px)}
+.hero-title h1{flex:none}
+.project-tag{display:grid;gap:4px;flex:1 1 150px;max-width:max-content;border-inline-start:4px solid var(--emerald);padding-inline-start:16px;font-size:.95rem;font-weight:600;color:var(--muted);margin-bottom:24px}
+.project-tag b{font-family:var(--f-display);font-size:clamp(1.1rem,2.2vw,1.4rem);font-weight:700;color:var(--emerald-strong);line-height:1.35}
 .hero h1 .thread{display:block;width:100%;height:28px;margin-top:4px}
 .hero h1 .thread path{fill:none;stroke:var(--coral);stroke-width:5;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:0;animation:draw 1.6s ease-out both}
 @keyframes draw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
@@ -338,6 +344,13 @@ input[type=range]{width:100%;accent-color:var(--emerald);height:28px}
 .badge svg{width:36px;height:36px}
 .badge.got{border-style:solid;border-color:var(--sand);background:var(--sand-soft);color:var(--ink)}
 .badge.got svg{color:var(--sand)}
+.badge.shield{border:2px dashed color-mix(in srgb,var(--sun) 60%,var(--line));font-weight:700}
+.badge.shield svg{width:46px;height:46px}
+.badge.shield small{font-size:.74rem;font-weight:600;color:var(--sand)}
+.badge.shield.got{border:2px solid var(--sun);background:linear-gradient(160deg,var(--sand-soft),color-mix(in srgb,var(--emerald) 16%,var(--sand-soft)));box-shadow:0 0 0 4px color-mix(in srgb,var(--sun) 28%,transparent),0 12px 26px -12px color-mix(in srgb,var(--sand) 80%,transparent)}
+.badge.shield.got svg{animation:shine 2.4s ease-in-out infinite}
+@keyframes shine{50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.badge.shield.got svg{animation:none}}
 .radar text{fill:var(--muted);font-size:11px;font-family:var(--f-body)}
 
 /* impact */
@@ -480,9 +493,9 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="آصِرة، العودة للأعلى">
+    <a class="brand" href="#top" aria-label="آصِرة، مدارس الإبداع للموهوبين، العودة للأعلى">
       <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="15" cy="20" r="10" fill="none" stroke="var(--ink)" stroke-width="4"/><circle cx="25" cy="20" r="10" fill="none" stroke="var(--emerald)" stroke-width="4"/><path d="M19.2 11.2a10 10 0 0 1 4.6 2.6" fill="none" stroke="var(--ink)" stroke-width="4"/></svg>
-      آصِرة
+      <span class="brand-txt">آصِرة<small>مدارس الإبداع للموهوبين</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="أقسام الصفحة">
       <a href="#how">كيف تعمل</a>
@@ -502,10 +515,12 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">مشروع القيم التربوية · أسرتي سعادتي</span>
+      <div class="hero-title">
       <h1>آصِرة
         <svg class="thread" viewBox="0 0 300 28" preserveAspectRatio="none" aria-hidden="true"><path d="M296 14 C 250 2, 220 26, 170 14 S 90 2, 60 14 S 20 24, 4 12"/></svg>
       </h1>
+      <p class="project-tag">مشروع القيم التربوية<b>أسرتي سعادتي ووقتي حياتي</b></p>
+      </div>
       <p class="tagline">لأن القرب يصنع الفرق</p>
       <p class="lead">آصِرة تساعد أسرتك على الحوار والتعاون وقضاء وقت أجمل معًا، بأنشطة قصيرة تطبقونها في البيت.</p>
       <div class="hero-ctas">
@@ -561,7 +576,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
       <li><b>1</b><h3>سجّلوا أسرتكم</h3><p>اكتبوا أسماء أفراد الأسرة. ولأكثر من جهاز، أنشئوا رمز الأسرة.</p></li>
       <li><b>2</b><h3>اعرفوا مساركم</h3><p>اعرضوا مشكلة تريدون حلها، أو أجيبوا عن 8 أسئلة سريعة.</p></li>
       <li><b>3</b><h3>نفّذوا الأنشطة</h3><p>3 أنشطة قصيرة في كل مسار، ثم قيّموها بالنجوم.</p></li>
-      <li><b>4</b><h3>شاهدوا التحسن</h3><p>أعيدوا الأسئلة بعد المسار، واجمعوا 3 أوسمة لتحصلوا على بطاقة تهنئة.</p></li>
+      <li><b>4</b><h3>شاهدوا التحسن</h3><p>أعيدوا الأسئلة بعد المسار، وبعد 3 جلسات حوار وأنشطة من 4 مسارات تحصلون على بطاقة تهنئة.</p></li>
     </ol>
     <a class="btn btn-primary" href="#journey" style="margin-top:28px">ابدأ الآن</a>
   </div>
@@ -705,7 +720,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
     <div class="sec-head">
       <span class="eyebrow">الخطوة 4 من 4</span>
       <h2>إنجازنا</h2>
-      <p>تابعوا ما أنجزتموه، وقيسوا التحسن، واجمعوا 3 أوسمة لتحصلوا على بطاقة التهنئة.</p>
+      <p>تابعوا ما أنجزتموه، وقيسوا التحسن، وبعد 3 جلسات حوار وأنشطة من 4 مسارات تحصلون على بطاقة التهنئة.</p>
     </div>
     <div class="stats" id="stats"></div>
     <div class="note green" style="margin-top:14px" id="adaptNote"></div>
@@ -740,11 +755,11 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 <section id="about" style="background:var(--sunk)">
   <div class="wrap" style="max-width:860px">
     <div class="sec-head"><span class="eyebrow">عن آصِرة</span><h2>أسئلة شائعة</h2></div>
-    <details><summary>ما هدف آصِرة؟</summary><p>آصِرة جزء من مشروع القيم التربوية «أسرتي سعادتي». هدفها تقوية الروابط داخل الأسرة بالحوار والتعاون والوقت المشترك، بأنشطة عملية قصيرة بدل النصائح.</p></details>
+    <details><summary>ما هدف آصِرة؟</summary><p>آصِرة جزء من مشروع القيم التربوية «أسرتي سعادتي ووقتي حياتي». هدفها تقوية الروابط داخل الأسرة بالحوار والتعاون والوقت المشترك، بأنشطة عملية قصيرة بدل النصائح.</p></details>
     <details><summary>هل يرى والداي إجاباتي؟</summary><p>لا. تُحفظ نتيجتك فقط دون إجاباتك، ويظهر للأسرة مسار مشترك محسوب من نتائج الجميع.</p></details>
     <details><summary>كيف نستخدمها على أكثر من جهاز؟</summary><p>أنشئ رمز الأسرة في خطوة «أسرتنا»، ثم يدخل بقية الأفراد الرمز نفسه من أجهزتهم. كل التعديلات تظهر للجميع خلال ثوانٍ.</p></details>
     <details><summary>ماذا لو لم يناسبنا نشاط؟</summary><p>أعطوه نجمة أو نجمتين، أو اختاروا «كان طويلًا علينا»، فتتغير الاقتراحات القادمة.</p></details>
-    <details><summary>كيف نحصل على بطاقة التهنئة؟</summary><p>اجمعوا أي 3 أوسمة، فتظهر البطاقة تلقائيًا. اكتب اسمك، ثم احفظها وأرسلها لمجموعة المدرسة على واتساب.</p></details>
+    <details><summary>كيف نحصل على بطاقة التهنئة؟</summary><p>أنجزوا 3 جلسات حوار وأنشطة من 4 مسارات (وسام الدرع)، فتظهر البطاقة تلقائيًا. اكتب اسمك، ثم احفظها وأرسلها لمجموعة المدرسة على واتساب.</p></details>
     <details><summary>الخصوصية</summary><p>بلا حسابات ولا بريد ولا كلمة مرور، ويكفي رمز الأسرة. لا تُحفظ إجاباتك نفسها، ولا يُرسل أي نص لنموذج ذكاء اصطناعي إلا إذا فعّلته بنفسك.</p></details>
     <details><summary>خطة العمل</summary>
       <ol class="stages" style="margin-top:10px">
@@ -763,7 +778,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <footer>
   <div class="wrap">
-    <div><b style="color:var(--ink);font-family:var(--f-display);font-size:1.15rem">آصِرة</b> · لأن القرب يصنع الفرق<br>مشروع القيم التربوية | أسرتي سعادتي | الصف الثاني والثالث المتوسط</div>
+    <div><b style="color:var(--ink);font-family:var(--f-display);font-size:1.15rem">آصِرة</b> · لأن القرب يصنع الفرق<br>مدارس الإبداع للموهوبين | مشروع القيم التربوية | أسرتي سعادتي ووقتي حياتي | الصف الثاني والثالث المتوسط</div>
     <a class="btn btn-ghost btn-sm" href="#top">العودة للأعلى</a>
   </div>
 </footer>
@@ -808,7 +823,7 @@ const CHECK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke=
 let DEVQ="";try{DEVQ=(new URLSearchParams(location.search).get("d")||"").replace(/[^a-z0-9]/gi,"").slice(0,8)}catch(e){}
 const KEY="asira.v2"+(DEVQ?"."+DEVQ:""), LKEY="asira.local.v2"+(DEVQ?"."+DEVQ:"");
 const blank=()=>({family:{name:"",members:[]},assess:{},done:{},ratings:{},pref:{maxMin:null},tasks:[],thanks:[],pulse:[],vote:{q:"",opts:[],votes:{},voters:[]},mirror:0,timerMin:0,surprises:0,lab:0,running:null,stars:{},checks:[],focus:null,base:{},measured:{}});
-const lblank=()=>({me:null,code:null,ver:0,base:null,quiz:null,dev:uid(),step:null,cert3:false,remeasure:null});
+const lblank=()=>({me:null,code:null,ver:0,base:null,quiz:null,dev:uid(),step:null,certDone:false,remeasure:null});
 let S=blank(), L=lblank();
 try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(blank(),JSON.parse(r))}catch(e){}
 try{const r=localStorage.getItem(LKEY);if(r)L=Object.assign(lblank(),JSON.parse(r))}catch(e){}
@@ -1080,7 +1095,7 @@ function stepDone(id){
   if(id==="family")return members().length>0;
   if(id==="assess")return !!familyResult();
   if(id==="paths")return Object.keys(S.done).length>0;
-  if(id==="progress")return badgeCount()>=3;
+  if(id==="progress")return certReady();
   return false;
 }
 let step=null;
@@ -1835,8 +1850,11 @@ const BADGES=[
  ["30 دقيقة بلا شاشات",()=>S.timerMin>=30],
  ["3 كلمات طيبة",()=>S.thanks.length>=3],
  ["نبض أسبوعين",()=>new Set(S.pulse.map(p=>p.week)).size>=2],
- ["4 مسارات",()=>new Set(Object.keys(S.done).filter(k=>A[k]).map(k=>A[k].p)).size>=4]
+ ["4 مسارات",()=>pathsCount()>=4]
 ];
+const SHIELD="4 مسارات";
+function pathsCount(){return new Set(Object.keys(S.done).filter(k=>A[k]).map(k=>A[k].p)).size}
+const certReady=()=>S.mirror>=3&&pathsCount()>=4;
 function radar(){
   const W=360,H=320,cx=W/2,cy=H/2+4,R=105,n=PATHS.length,ang=i=>-Math.PI/2+i*2*Math.PI/n,pt=(i,r)=>[cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))];
   let g="";[1/3,2/3,1].forEach(f=>{g+=`<polygon points="${PATHS.map((_,i)=>pt(i,R*f).join(",")).join(" ")}" fill="none" stroke="var(--line)"/>`});
@@ -1848,7 +1866,9 @@ function radar(){
 function renderProgress(){
   $("#stats").innerHTML=[[Object.keys(S.done).length,"نشاطًا منجزًا"],[S.mirror,"جلسة حوار"],[S.timerMin,"دقيقة بلا شاشات"],[S.thanks.length,"كلمة طيبة"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   $("#radar").innerHTML=radar();
-  $("#badges").innerHTML=BADGES.map(([n,f])=>{const g=f();return `<div class="badge ${g?"got":""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/>${g?'<path d="M9.5 9l2 2 3-3.5"/>':""}</svg>${esc(n)}</div>`}).join("");
+  $("#badges").innerHTML=BADGES.map(([n,f])=>{const g=f();
+    if(n===SHIELD)return `<div class="badge shield ${g?"got":""}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l8 3.1v6.1c0 5-3.4 9-8 10.6-4.6-1.6-8-5.6-8-10.6V5.3z" fill="${g?"var(--sun)":"none"}" stroke="${g?"var(--sand)":"currentColor"}" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7.2l1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="${g?"#fff":"none"}" stroke="${g?"#fff":"currentColor"}" stroke-width="1.2" stroke-linejoin="round"/></svg>${esc(n)}<small>وسام الدرع</small></div>`;
+    return `<div class="badge ${g?"got":""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/>${g?'<path d="M9.5 9l2 2 3-3.5"/>':""}</svg>${esc(n)}</div>`}).join("");
   $("#adaptNote").innerHTML=S.pref.maxMin?`الاقتراحات الآن لا تتجاوز <b class="num">${S.pref.maxMin}</b> دقيقة بناءً على تقييمكم. <button class="linkish" type="button" id="prefReset">ألغِ</button>`:"قيّموا كل نشاط بالنجوم بعد إنهائه، وتتكيّف الاقتراحات معكم.";
   const pr=$("#prefReset");pr&&pr.addEventListener("click",()=>{S.pref.maxMin=null;save()});
   renderImprove();renderCertBox();
@@ -1870,14 +1890,14 @@ function renderImprove(){
 }
 let certPending=false;
 function renderCertBox(){
-  const n=badgeCount(),el=$("#certBox");
-  el.innerHTML=n>=3?`<div class="note green" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>حصلتم على <b class="num">${n}</b> أوسمة، وبطاقة التهنئة جاهزة.</span><button class="btn btn-primary btn-sm" type="button" id="certOpen">بطاقة التهنئة</button></div>`
-    :`<p class="small muted">اجمعوا <b class="num">${3-n}</b> ${3-n===1?"وسامًا آخر":"أوسمة أخرى"} لتحصلوا على بطاقة التهنئة (<span class="num">${n}</span> من 3).</p>`;
+  const el=$("#certBox"),m=Math.min(S.mirror,3),k=Math.min(pathsCount(),4);
+  el.innerHTML=certReady()?`<div class="note green" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>أنجزتم 3 جلسات حوار وأنشطة من 4 مسارات، وبطاقة التهنئة جاهزة.</span><button class="btn btn-primary btn-sm" type="button" id="certOpen">بطاقة التهنئة</button></div>`
+    :`<p class="small muted">تظهر بطاقة التهنئة بعد <b>3 جلسات حوار</b> وأنشطة من <b>4 مسارات</b>. أنجزتم: جلسات الحوار <span class="num">${m}</span> من 3، والمسارات <span class="num">${k}</span> من 4.</p>`;
   const b=$("#certOpen",el);b&&b.addEventListener("click",openCert);
 }
 function checkCert(){
-  if(badgeCount()<3||L.cert3)return;
-  L.cert3=true;saveLocal();
+  if(!certReady()||L.certDone)return;
+  L.certDone=true;saveLocal();
   if($("#modal").hidden)setTimeout(openCert,700);else certPending=true;
 }
 async function drawCert(cv,name){
@@ -1891,6 +1911,7 @@ async function drawCert(cv,name){
   x.fillStyle="#E6F8EF";rr(40,40,W-80,H-80,48);x.fill();
   x.lineWidth=10;x.strokeStyle="#08965F";rr(40,40,W-80,H-80,48);x.stroke();
   x.lineWidth=3;x.strokeStyle="#FFB800";rr(66,66,W-132,H-132,34);x.stroke();
+  x.fillStyle="#067A4D";x.font=font(700,30,"d");x.fillText("مدارس الإبداع للموهوبين",W/2,120);
   x.lineWidth=12;x.strokeStyle="#0D1B2A";x.beginPath();x.arc(W/2-34,190,52,0,Math.PI*2);x.stroke();
   x.strokeStyle="#08965F";x.beginPath();x.arc(W/2+34,190,52,0,Math.PI*2);x.stroke();
   x.fillStyle="#0D1B2A";x.font=font(800,84,"d");x.fillText("بطاقة تهنئة",W/2,370);
@@ -1903,10 +1924,10 @@ async function drawCert(cv,name){
   x.font=font(600,32);
   const shown=got.slice(0,8),cols=2,bw=420,bh=64,gap=20,rows=Math.ceil(shown.length/cols),top=Math.round(790+(1110-790-(rows*(bh+16)-16))/2),left=(W-(cols*bw+gap))/2;
   shown.forEach((b,i)=>{const r=Math.floor(i/cols),c=i%cols,X=W-left-(c+1)*bw-c*gap,Y=top+r*(bh+16);
-    x.fillStyle="#FFF3D1";rr(X,Y,bw,bh,32);x.fill();x.fillStyle="#0D1B2A";x.fillText("★ "+b,X+bw/2,Y+43)});
+    const sh=b===SHIELD;x.fillStyle=sh?"#FFB800":"#FFF3D1";rr(X,Y,bw,bh,32);x.fill();if(sh){x.lineWidth=4;x.strokeStyle="#E79A00";x.stroke()}x.fillStyle="#0D1B2A";x.fillText((sh?"◆ درع ":"★ ")+b,X+bw/2,Y+43)});
   x.fillStyle="#556274";x.font=font(500,32);x.fillText(new Date().toLocaleDateString("ar-SA-u-nu-latn-ca-gregory",{year:"numeric",month:"long",day:"numeric"}),W/2,1170);
   x.fillStyle="#08965F";x.font=font(700,36,"d");x.fillText("آصِرة · لأن القرب يصنع الفرق",W/2,1232);
-  x.fillStyle="#556274";x.font=font(500,26);x.fillText("مشروع القيم التربوية · أسرتي سعادتي",W/2,1272);
+  x.fillStyle="#556274";x.font=font(500,26);x.fillText("مشروع القيم التربوية · أسرتي سعادتي ووقتي حياتي",W/2,1272);
 }
 function openCert(){
   const me=L.me&&memberById(L.me),n=badgeCount();
