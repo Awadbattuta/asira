@@ -393,6 +393,11 @@ details p{color:var(--muted);margin-top:10px;max-width:70ch}
 
 footer{border-top:1px solid var(--line);padding-block:36px calc(36px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.92rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+.credits{display:flex;gap:28px;align-items:flex-end;text-align:center;line-height:1.4}
+.credit{display:flex;flex-direction:column;align-items:center;gap:2px}
+.credit+.credit{border-inline-start:1px solid var(--line);padding-inline-start:28px}
+.credits-name{font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--emerald-strong)}
+.credits-name-2{font-size:1.35rem}
 
 .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px;z-index:90;font-weight:600;box-shadow:var(--shadow);max-width:calc(100% - 32px);text-align:center;direction:rtl}
 
@@ -519,7 +524,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
       <h1>آصِرة
         <svg class="thread" viewBox="0 0 300 28" preserveAspectRatio="none" aria-hidden="true"><path d="M296 14 C 250 2, 220 26, 170 14 S 90 2, 60 14 S 20 24, 4 12"/></svg>
       </h1>
-      <p class="project-tag">مشروع القيم التربوية<b>أسرتي سعادتي ووقتي حياتي</b></p>
+      <p class="project-tag">مشروع القيم التربوية<b><span style="white-space:nowrap">أسرتي سعادتي |</span> <span style="white-space:nowrap">وقتي حياتي</span></b></p>
       </div>
       <p class="tagline">لأن القرب يصنع الفرق</p>
       <p class="lead">آصِرة تساعد أسرتك على الحوار والتعاون وقضاء وقت أجمل معًا، بأنشطة قصيرة تطبقونها في البيت.</p>
@@ -755,7 +760,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 <section id="about" style="background:var(--sunk)">
   <div class="wrap" style="max-width:860px">
     <div class="sec-head"><span class="eyebrow">عن آصِرة</span><h2>أسئلة شائعة</h2></div>
-    <details><summary>ما هدف آصِرة؟</summary><p>آصِرة جزء من مشروع القيم التربوية «أسرتي سعادتي ووقتي حياتي». هدفها تقوية الروابط داخل الأسرة بالحوار والتعاون والوقت المشترك، بأنشطة عملية قصيرة بدل النصائح.</p></details>
+    <details><summary>ما هدف آصِرة؟</summary><p>آصِرة جزء من مشروع القيم التربوية «أسرتي سعادتي | وقتي حياتي». هدفها تقوية الروابط داخل الأسرة بالحوار والتعاون والوقت المشترك، بأنشطة عملية قصيرة بدل النصائح.</p></details>
     <details><summary>هل يرى والداي إجاباتي؟</summary><p>لا. تُحفظ نتيجتك فقط دون إجاباتك، ويظهر للأسرة مسار مشترك محسوب من نتائج الجميع.</p></details>
     <details><summary>كيف نستخدمها على أكثر من جهاز؟</summary><p>أنشئ رمز الأسرة في خطوة «أسرتنا»، ثم يدخل بقية الأفراد الرمز نفسه من أجهزتهم. كل التعديلات تظهر للجميع خلال ثوانٍ.</p></details>
     <details><summary>ماذا لو لم يناسبنا نشاط؟</summary><p>أعطوه نجمة أو نجمتين، أو اختاروا «كان طويلًا علينا»، فتتغير الاقتراحات القادمة.</p></details>
@@ -778,7 +783,11 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <footer>
   <div class="wrap">
-    <div><b style="color:var(--ink);font-family:var(--f-display);font-size:1.15rem">آصِرة</b> · لأن القرب يصنع الفرق<br>مدارس الإبداع للموهوبين | مشروع القيم التربوية | أسرتي سعادتي ووقتي حياتي | الصف الثاني والثالث المتوسط</div>
+    <div><b style="color:var(--ink);font-family:var(--f-display);font-size:1.15rem">آصِرة</b> · لأن القرب يصنع الفرق<br>مدارس الإبداع للموهوبين | مشروع القيم التربوية | أسرتي سعادتي | وقتي حياتي | الصف الثاني والثالث المتوسط</div>
+    <div class="credits">
+      <div class="credit"><span>تصميم الطالب</span><b class="credits-name">تميم المالكي</b></div>
+      <div class="credit"><span>إشراف الأستاذ</span><b class="credits-name credits-name-2">إبراهيم سهلي</b></div>
+    </div>
     <a class="btn btn-ghost btn-sm" href="#top">العودة للأعلى</a>
   </div>
 </footer>
@@ -1927,7 +1936,7 @@ async function drawCert(cv,name){
     const sh=b===SHIELD;x.fillStyle=sh?"#FFB800":"#FFF3D1";rr(X,Y,bw,bh,32);x.fill();if(sh){x.lineWidth=4;x.strokeStyle="#E79A00";x.stroke()}x.fillStyle="#0D1B2A";x.fillText((sh?"◆ درع ":"★ ")+b,X+bw/2,Y+43)});
   x.fillStyle="#556274";x.font=font(500,32);x.fillText(new Date().toLocaleDateString("ar-SA-u-nu-latn-ca-gregory",{year:"numeric",month:"long",day:"numeric"}),W/2,1170);
   x.fillStyle="#08965F";x.font=font(700,36,"d");x.fillText("آصِرة · لأن القرب يصنع الفرق",W/2,1232);
-  x.fillStyle="#556274";x.font=font(500,26);x.fillText("مشروع القيم التربوية · أسرتي سعادتي ووقتي حياتي",W/2,1272);
+  x.fillStyle="#556274";x.font=font(500,26);x.fillText("مشروع القيم التربوية · أسرتي سعادتي | وقتي حياتي",W/2,1272);
 }
 function openCert(){
   const me=L.me&&memberById(L.me),n=badgeCount();
